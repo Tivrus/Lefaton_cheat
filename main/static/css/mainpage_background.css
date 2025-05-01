@@ -1,0 +1,93 @@
+/* Добавляем CSS-переменную для фонового цвета */
+:root {
+    --background-color: #050525;
+}
+
+/* Фиксированный фон для всей страницы */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: linear-gradient(to bottom, rgb(0, 0, 40) 0%, var(--background-color) 50%, rgb(0, 0, 0) 100%);
+}
+
+.background_container {
+    position: relative; /* Обратно на relative */
+    width: 100%;
+    min-height: 100vh; /* Используем min-height вместо height */
+    overflow: visible; /* Разрешаем контенту выходить за пределы */
+}
+
+.vertical-centered-box {
+  position: fixed; /* Звезды будут фиксированными */
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: -1;
+}
+.vertical-centered-box:after {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+  
+}
+.vertical-centered-box .content {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 0;
+}
+
+#particles-background,
+#particles-foreground {
+  position: fixed; /* Оставляем fixed для звезд */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Content on top of particles */
+.content_on_top {
+  position: relative;
+  z-index: 1;
+  padding: 50px 20px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}

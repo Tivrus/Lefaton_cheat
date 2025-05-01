@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lefaton cheats</title>
+    <link rel="stylesheet" href="../static/css/mainpage.css">
+    <link rel="stylesheet" href="../static/css/mainpage_header.css">
+    <link rel="stylesheet" href="../static/css/mainpage_background.css">
+    <link rel="stylesheet" href="../static/css/mainpage_main_title_text.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        [data-background="gradient"] body {
+            background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Content Container -->
+        <div class="header_content">
+            <div class="left_side_header">
+                <a href="/main" class="home_btn_logo_header"><img src="../static/images/logo.svg" alt=""></a>
+                <a href="/catalog" class="left_side_header_btn_catalog">
+                    <section>
+                        Арсенал читов
+                    </section>
+                </a>
+                <a href="" class="left_side_header_btn_community">
+                    <section>
+                        Страница сообщества
+                    </section>
+                </a>
+                <a href="" class="left_side_header_btn_support">
+                    <section>
+                        Техподдержка
+                    </section>
+                </a>
+                <a href="" class="left_side_header_btn_faq">
+                    <section>
+                        FAQ
+                    </section>
+                </a>
+                <a href="" class="left_side_header_btn_updates">
+                    <section>
+                        Обновления
+                    </section>
+                </a>
+                <a href="" class="left_side_header_btn_upcoming">
+                    <section>
+                        Скоро в продаже
+                    </section>
+                </a>
+            </div>
+            <div class="right_side_header">
+                <a href="/account" class="right_side_header_bth_account">
+                    <section>
+                        Аккаунт
+                    </section>
+                </a>
+            </div>
+        </div>
+        <!-- Content end -->
+         
+        <!-- Waves Container -->
+        <div>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 1440 100" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+                <defs>
+                    <!-- Smoother wave path with more control points -->
+                    <path id="wave-path" d="M0,40 C160,20 240,80 400,40 C560,0 720,80 880,50 C1040,20 1200,0 1360,40 L1440,100 L0,100 Z" />
+                </defs>
+                <g class="parallax">
+                    <!-- Use the new smoother wave path -->
+                    <use class="wave1" xlink:href="#wave-path" x="0" y="0"/>
+                    <use class="wave1" xlink:href="#wave-path" x="1440" y="0"/>
+                    <use class="wave2" xlink:href="#wave-path" x="0" y="10"/>
+                    <use class="wave2" xlink:href="#wave-path" x="1440" y="10"/>
+                    <use class="wave3" xlink:href="#wave-path" x="0" y="15"/>
+                    <use class="wave3" xlink:href="#wave-path" x="1440" y="15"/>
+                    <use class="wave4" xlink:href="#wave-path" x="0" y="20"/>
+                    <use class="wave4" xlink:href="#wave-path" x="1440" y="20"/>
+                </g>
+            </svg>
+        </div>
+        <!-- Waves end -->
+    </header>
+    <main>
+        <div class="background_container">
+            <!-- Particles Background -->
+            <div id="particles-background" class="vertical-centered-box"></div>
+            <div id="particles-foreground" class="vertical-centered-box"></div>
+
+            <!-- Content on Top -->
+            <div class="content_on_top">
+                <h1 class="main_title_text">
+                    <span class="main_title">Лучший магазин</span> по продаже читов к разным играм
+                </h1>
+                <p class="main_subtitle">
+                    Большой каталог приватных качественных читов, созданных опытными разработчиками, которые сделают вашу игру более продуктивной и комфортной.
+                </p>
+                
+                <div class="action-buttons">
+                    <a href="/catalog" class="primary-button">
+                        <i class="fas fa-gamepad"></i> Перейти в каталог
+                    </a>
+                    <a href="/account" class="secondary-button">
+                        <i class="fas fa-user"></i> Личный кабинет
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../static/js/mainpage_background.js"></script>
+    <script src="../static/js/theme-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lefaton Cheats | Личный кабинет</title>
+    <link rel="stylesheet" href="../static/css/mainpage.css">
+    <link rel="stylesheet" href="../static/css/mainpage_header.css">
+    <link rel="stylesheet" href="../static/css/mainpage_background.css">
+    <link rel="stylesheet" href="../static/css/account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Spectrum color picker library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
+</head>
+<body>
+    <header>
+        <!-- Content Container -->
+        <div class="header_content">
+            <div class="left_side_header">
+                <a href="/main" class="home_btn_logo_header"><img src="../static/images/logo.svg" alt=""></a>
+                <a href="/catalog" class="left_side_header_btn_catalog">
+                    <section>
+                        Арсенал читов
+                    </section>
+                </a>
+                <a href="/community" class="left_side_header_btn_community">
+                    <section>
+                        Страница сообщества
+                    </section>
+                </a>
+                <a href="/support" class="left_side_header_btn_support">
+                    <section>
+                        Техподдержка
+                    </section>
+                </a>
+                <a href="/faq" class="left_side_header_btn_faq">
+                    <section>
+                        FAQ
+                    </section>
+                </a>
+                <a href="/updates" class="left_side_header_btn_updates">
+                    <section>
+                        Обновления
+                    </section>
+                </a>
+                <a href="/upcoming" class="left_side_header_btn_upcoming">
+                    <section>
+                        Скоро в продаже
+                    </section>
+                </a>
+            </div>
+            <div class="right_side_header">
+                <a href="/account" class="right_side_header_bth_account active">
+                    <section>
+                        Аккаунт
+                    </section>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Waves Container -->
+        <div>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 1440 100" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+                <defs>
+                    <!-- Smoother wave path with more control points -->
+                    <path id="wave-path" d="M0,40 C160,20 240,80 400,40 C560,0 720,80 880,50 C1040,20 1200,0 1360,40 L1440,100 L0,100 Z" />
+                </defs>
+                <g class="parallax">
+                    <!-- Use the new smoother wave path -->
+                    <use class="wave1" xlink:href="#wave-path" x="0" y="0"/>
+                    <use class="wave1" xlink:href="#wave-path" x="1440" y="0"/>
+                    <use class="wave2" xlink:href="#wave-path" x="0" y="10"/>
+                    <use class="wave2" xlink:href="#wave-path" x="1440" y="10"/>
+                    <use class="wave3" xlink:href="#wave-path" x="0" y="15"/>
+                    <use class="wave3" xlink:href="#wave-path" x="1440" y="15"/>
+                    <use class="wave4" xlink:href="#wave-path" x="0" y="20"/>
+                    <use class="wave4" xlink:href="#wave-path" x="1440" y="20"/>
+                </g>
+            </svg>
+        </div>
+    </header>
+    
+    <main>
+        <div class="background_container">
+            <!-- Particles Background -->
+            <div id="particles-background" class="vertical-centered-box"></div>
+            <div id="particles-foreground" class="vertical-centered-box"></div>
+
+            <!-- Account Container -->
+            <div class="account-container">
+                <div class="account-sidebar">
+                    <div class="user-profile">
+                        <div class="avatar-container">
+                            <img src="../static/images/default-avatar.png" alt="User Avatar" class="user-avatar">
+                            <div class="avatar-change-overlay">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <h2 class="username">Username</h2>
+                            <p class="user-status">Premium пользователь</p>
+                        </div>
+                    </div>
+                    <nav class="account-nav">
+                        <ul>
+                            <li class="nav-item active" data-section="overview">
+                                <i class="fas fa-home"></i> Обзор
+                            </li>
+                            <li class="nav-item" data-section="settings">
+                                <i class="fas fa-cog"></i> Настройки
+                            </li>
+                            <li class="nav-item" data-section="appearance">
+                                <i class="fas fa-paint-brush"></i> Внешний вид
+                            </li>
+                            <li class="nav-item" data-section="purchases">
+                                <i class="fas fa-shopping-cart"></i> Мои покупки
+                            </li>
+                            <li class="nav-item" data-section="library">
+                                <i class="fas fa-gamepad"></i> Библиотека читов
+                            </li>
+                            <li class="nav-item" data-section="security">
+                                <i class="fas fa-shield-alt"></i> Безопасность
+                            </li>
+                            <li class="nav-item" data-section="support">
+                                <i class="fas fa-headset"></i> Поддержка
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="account-content">
+                    <!-- Overview Section -->
+                    <section id="overview" class="account-section active">
+                        <h1 class="section-title">Обзор аккаунта</h1>
+                        
+                        <div class="overview-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-gamepad"></i></div>
+                                <div class="stat-info">
+                                    <h3>5</h3>
+                                    <p>Активных читов</p>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                                <div class="stat-info">
+                                    <h3>30 дней</h3>
+                                    <p>Оставшийся премиум</p>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                                <div class="stat-info">
+                                    <h3>1200</h3>
+                                    <p>Бонусных баллов</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recent-activity">
+                            <h2>Последняя активность</h2>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon"><i class="fas fa-download"></i></div>
+                                    <div class="activity-details">
+                                        <h4>Загружен чит для Valorant</h4>
+                                        <p>Сегодня, 14:35</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item">
+                                    <div class="activity-icon"><i class="fas fa-shopping-cart"></i></div>
+                                    <div class="activity-details">
+                                        <h4>Покупка: Premium подписка (1 месяц)</h4>
+                                        <p>Вчера, 20:15</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-item">
+                                    <div class="activity-icon"><i class="fas fa-sign-in-alt"></i></div>
+                                    <div class="activity-details">
+                                        <h4>Вход в аккаунт с нового устройства</h4>
+                                        <p>21.05.2023, 09:42</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Settings Section -->
+                    <section id="settings" class="account-section">
+                        <h1 class="section-title">Настройки аккаунта</h1>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="display-name">Отображаемое имя</label>
+                                <input type="text" id="display-name" value="Username">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" value="user@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="language">Предпочитаемый язык</label>
+                                <select id="language">
+                                    <option value="ru" selected>Русский</option>
+                                    <option value="en">English</option>
+                                    <option value="de">Deutsch</option>
+                                    <option value="fr">Français</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="currency">Предпочитаемая валюта</label>
+                                <select id="currency">
+                                    <option value="rub" selected>₽ Рубль</option>
+                                    <option value="usd">$ Доллар</option>
+                                    <option value="eur">€ Евро</option>
+                                    <option value="gbp">£ Фунт стерлингов</option>
+                                    <option value="cny">¥ Юань</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="notifications">Уведомления</label>
+                                <div class="toggle-container">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="email-notifications" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span>Email уведомления</span>
+                                </div>
+                                <div class="toggle-container">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="update-notifications" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span>Уведомления об обновлениях</span>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="save-btn">Сохранить изменения</button>
+                        </form>
+                    </section>
+                    
+                    <!-- Appearance Section -->
+                    <section id="appearance" class="account-section">
+                        <h1 class="section-title">Настройки внешнего вида</h1>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label>Тема</label>
+                                <div class="toggle-container">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="theme-toggle" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span>Тёмная тема</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Размер текста</label>
+                                <div class="slider-container">
+                                    <label for="titleSize">Размер заголовков:</label>
+                                    <input type="range" id="titleSize" min="80" max="120" step="5" value="100">
+                                    <span id="titleSize-value">100%</span>
+                                </div>
+                                <div class="slider-container">
+                                    <label for="subtitleSize">Размер подзаголовков:</label>
+                                    <input type="range" id="subtitleSize" min="80" max="120" step="5" value="100">
+                                    <span id="subtitleSize-value">100%</span>
+                                </div>
+                                <div class="slider-container">
+                                    <label for="bodyTextSize">Размер обычного текста:</label>
+                                    <input type="range" id="bodyTextSize" min="80" max="120" step="5" value="100">
+                                    <span id="bodyTextSize-value">100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Цветовая схема</label>
+                                <div class="color-options">
+                                    <div class="color-option">
+                                        <label for="headerColor">Цвет шапки:</label>
+                                        <input type="text" id="headerColor" class="color-picker" value="#FFA600">
+                                    </div>
+                                    <div class="color-option">
+                                        <label for="backgroundColor">Цвет фона:</label>
+                                        <input type="text" id="backgroundColor" class="color-picker" value="#000000">
+                                    </div>
+                                    <div class="color-option">
+                                        <label for="textColor">Цвет текста:</label>
+                                        <input type="text" id="textColor" class="color-picker" value="#FFFFFF">
+                                    </div>
+                                    <div class="color-option">
+                                        <label for="accentColor">Акцентный цвет:</label>
+                                        <input type="text" id="accentColor" class="color-picker" value="#FFA600">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Анимация</label>
+                                <div class="slider-container">
+                                    <label for="waveSpeed">Скорость волн:</label>
+                                    <input type="range" id="waveSpeed" min="0" max="100" step="1" value="50">
+                                    <span id="waveSpeed-value">50</span>
+                                </div>
+                                <div class="slider-container">
+                                    <label for="starSpeed">Скорость частиц фона:</label>
+                                    <input type="range" id="starSpeed" min="0" max="100" step="1" value="50">
+                                    <span id="starSpeed-value">50</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Тип фона</label>
+                                <div class="background-options">
+                                    <div class="background-option active" data-background="stars">
+                                        <i class="fas fa-star"></i>
+                                        <span>Звезды</span>
+                                    </div>
+                                    <div class="background-option" data-background="particles">
+                                        <i class="fas fa-atom"></i>
+                                        <span>Частицы</span>
+                                    </div>
+                                    <div class="background-option" data-background="gradient">
+                                        <i class="fas fa-palette"></i>
+                                        <span>Градиент</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="save-appearance" class="save-btn">Сохранить настройки</button>
+                            <button type="button" id="reset-appearance" class="reset-btn">Сбросить настройки</button>
+                        </div>
+                    </section>
+                    
+                    <!-- Purchases Section -->
+                    <section id="purchases" class="account-section">
+                        <h1 class="section-title">Мои покупки</h1>
+                        <div class="purchases-container">
+                            <p class="no-items-message">История покупок будет отображаться здесь</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Library Section -->
+                    <section id="library" class="account-section">
+                        <h1 class="section-title">Библиотека читов</h1>
+                        <div class="library-container">
+                            <p class="no-items-message">Приобретенные читы будут отображаться здесь</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Security Section -->
+                    <section id="security" class="account-section">
+                        <h1 class="section-title">Безопасность</h1>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label for="current-password">Текущий пароль</label>
+                                <input type="password" id="current-password">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="new-password">Новый пароль</label>
+                                <input type="password" id="new-password">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirm-password">Подтвердите пароль</label>
+                                <input type="password" id="confirm-password">
+                            </div>
+                            
+                            <button type="button" id="change-password" class="save-btn">Изменить пароль</button>
+                            
+                            <div class="divider"></div>
+                            
+                            <div class="form-group">
+                                <label>Двухфакторная аутентификация</label>
+                                <div class="toggle-container">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="two-factor-auth">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span>Включить двухфакторную аутентификацию</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Support Section -->
+                    <section id="support" class="account-section">
+                        <h1 class="section-title">Поддержка</h1>
+                        <div class="support-container">
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label for="support-topic">Тема обращения</label>
+                                    <select id="support-topic">
+                                        <option value="">Выберите тему</option>
+                                        <option value="technical">Техническая проблема</option>
+                                        <option value="payment">Проблема с оплатой</option>
+                                        <option value="account">Проблема с аккаунтом</option>
+                                        <option value="other">Другое</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="support-message">Сообщение</label>
+                                    <textarea id="support-message" rows="6" placeholder="Опишите вашу проблему подробно..."></textarea>
+                                </div>
+                                
+                                <button type="button" id="send-support" class="save-btn">Отправить запрос</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Spectrum color picker library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+    <script src="../static/js/mainpage_background.js"></script>
+    <script src="../static/js/theme-switcher.js"></script>
+    <script src="../static/js/account.js"></script>
+</body>
+</html> 

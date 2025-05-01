@@ -1,0 +1,31 @@
+body{
+    background-color: rgba(37, 37, 43, 1);
+}
+
+
+
+.main_title_text{
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    font-family: 'Ubuntu', Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    max-width: 600px;
+    margin: 0;
+}
+
+
+.main_title_text .main_title{
+    color: rgb(255, 183, 0);
+}
+
+
+.main_subtitle{
+    color: rgb(146, 150, 169);
+    font-size: 18px;
+    font-family: 'Ubuntu', Arial, sans-serif;
+    display: inline-block;
+    max-width: 700px;
+    margin: 0;
+}
