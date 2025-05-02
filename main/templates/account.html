@@ -4,57 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lefaton Cheats | Личный кабинет</title>
-    <link rel="stylesheet" href="../static/css/mainpage.css">
-    <link rel="stylesheet" href="../static/css/mainpage_header.css">
-    <link rel="stylesheet" href="../static/css/mainpage_background.css">
-    <link rel="stylesheet" href="../static/css/account.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Spectrum color picker library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Pickr color picker library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css">
 </head>
 <body>
     <header>
         <!-- Content Container -->
         <div class="header_content">
-            <div class="left_side_header">
-                <a href="/main" class="home_btn_logo_header"><img src="../static/images/logo.svg" alt=""></a>
-                <a href="/catalog" class="left_side_header_btn_catalog">
-                    <section>
-                        Арсенал читов
-                    </section>
-                </a>
-                <a href="/community" class="left_side_header_btn_community">
-                    <section>
-                        Страница сообщества
-                    </section>
-                </a>
-                <a href="/support" class="left_side_header_btn_support">
-                    <section>
-                        Техподдержка
-                    </section>
-                </a>
-                <a href="/faq" class="left_side_header_btn_faq">
-                    <section>
-                        FAQ
-                    </section>
-                </a>
-                <a href="/updates" class="left_side_header_btn_updates">
-                    <section>
-                        Обновления
-                    </section>
-                </a>
-                <a href="/upcoming" class="left_side_header_btn_upcoming">
-                    <section>
-                        Скоро в продаже
-                    </section>
-                </a>
-            </div>
-            <div class="right_side_header">
-                <a href="/account" class="right_side_header_bth_account active">
-                    <section>
-                        Аккаунт
-                    </section>
-                </a>
+            <div class="unified_header">
+                <a href="/main" class="home_btn_logo_header"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Lefaton Logo"></a>
+                <div class="nav_links">
+                    <a href="/catalog" class="header_btn">
+                        <section>
+                            <i class="fas fa-gamepad"></i> Арсенал читов
+                        </section>
+                    </a>
+                    <a href="/community" class="header_btn">
+                        <section>
+                            <i class="fas fa-users"></i> Сообщество
+                        </section>
+                    </a>
+                    <a href="/support" class="header_btn">
+                        <section>
+                            <i class="fas fa-headset"></i> Техподдержка
+                        </section>
+                    </a>
+                    <a href="/faq" class="header_btn">
+                        <section>
+                            <i class="fas fa-question-circle"></i> FAQ
+                        </section>
+                    </a>
+                    <a href="/updates" class="header_btn">
+                        <section>
+                            <i class="fas fa-sync-alt"></i> Обновления
+                        </section>
+                    </a>
+                    <a href="/upcoming" class="header_btn">
+                        <section>
+                            <i class="fas fa-clock"></i> Скоро в продаже
+                        </section>
+                    </a>
+                    <a href="/account" class="header_btn account_btn active">
+                        <section>
+                            <i class="fas fa-user"></i> Аккаунт
+                        </section>
+                    </a>
+                    <div class="settings-dropdown">
+                        <div class="settings-btn">
+                            <i class="fas fa-cog"></i> Настройки
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="theme-switch-container">
+                                <span>Тёмная тема</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="theme-checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <a href="/customize" class="dropdown-item">
+                                <i class="fas fa-paint-brush"></i> Настройка интерфейса
+                            </a>
+                            <a href="/account" class="dropdown-item">
+                                <i class="fas fa-user-cog"></i> Настройки профиля
+                            </a>
+                            <div class="divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i> Выйти
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
         
@@ -92,7 +124,7 @@
                 <div class="account-sidebar">
                     <div class="user-profile">
                         <div class="avatar-container">
-                            <img src="../static/images/default-avatar.png" alt="User Avatar" class="user-avatar">
+                            <img src="{{ url_for('static', filename='images/default-avatar.png') }}" alt="User Avatar" class="user-avatar">
                             <div class="avatar-change-overlay">
                                 <i class="fas fa-camera"></i>
                             </div>
@@ -107,23 +139,26 @@
                             <li class="nav-item active" data-section="overview">
                                 <i class="fas fa-home"></i> Обзор
                             </li>
-                            <li class="nav-item" data-section="settings">
-                                <i class="fas fa-cog"></i> Настройки
-                            </li>
-                            <li class="nav-item" data-section="appearance">
-                                <i class="fas fa-paint-brush"></i> Внешний вид
+                            <li class="nav-item" data-section="library">
+                                <i class="fas fa-gamepad"></i> Библиотека читов
                             </li>
                             <li class="nav-item" data-section="purchases">
                                 <i class="fas fa-shopping-cart"></i> Мои покупки
                             </li>
-                            <li class="nav-item" data-section="library">
-                                <i class="fas fa-gamepad"></i> Библиотека читов
+                            <li class="nav-item" data-section="settings">
+                                <i class="fas fa-cog"></i> Настройки профиля
+                            </li>
+                            <li class="nav-item" data-section="appearance">
+                                <i class="fas fa-paint-brush"></i> Внешний вид
                             </li>
                             <li class="nav-item" data-section="security">
                                 <i class="fas fa-shield-alt"></i> Безопасность
                             </li>
                             <li class="nav-item" data-section="support">
                                 <i class="fas fa-headset"></i> Поддержка
+                            </li>
+                            <li class="nav-item" data-section="contact">
+                                <i class="fas fa-envelope"></i> Связаться с нами
                             </li>
                         </ul>
                     </nav>
@@ -188,11 +223,147 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Product Cards Section -->
+                        <div class="game-products">
+                            <h2>Наши продукты</h2>
+                            <div class="product-cards">
+                                <div class="product-card" id="rust-card">
+                                    <div class="product-image">
+                                        <img src="{{ url_for('static', filename='images/rust.jpg') }}" alt="Rust Cheat">
+                                        <div class="product-badge premium">Premium</div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3>Rust Pro</h3>
+                                        <p>Полный пакет функций для Rust</p>
+                                        <div class="product-price">
+                                            <span>5000 ₽</span>
+                                            <a href="/catalog/rust" class="product-btn">Подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-card" id="cs2-card">
+                                    <div class="product-image">
+                                        <img src="{{ url_for('static', filename='images/cs2.jpg') }}" alt="CS2 Cheat">
+                                        <div class="product-badge premium">Premium</div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3>CS2 Master</h3>
+                                        <p>Расширенные возможности для CS2</p>
+                                        <div class="product-price">
+                                            <span>4200 ₽</span>
+                                            <a href="/catalog/cs2" class="product-btn">Подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-card" id="warthunder-card">
+                                    <div class="product-image">
+                                        <img src="{{ url_for('static', filename='images/warthunder.jpg') }}" alt="War Thunder Cheat">
+                                        <div class="product-badge premium">Premium</div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3>War Thunder Elite</h3>
+                                        <p>Превосходство в воздухе и на земле</p>
+                                        <div class="product-price">
+                                            <span>3800 ₽</span>
+                                            <a href="/catalog/warthunder" class="product-btn">Подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Library Section -->
+                    <section id="library" class="account-section">
+                        <h1 class="section-title">Библиотека читов</h1>
+                        <div class="library-container">
+                            <div class="library-filters">
+                                <div class="library-search">
+                                    <input type="text" placeholder="Поиск...">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="library-sort">
+                                    <select>
+                                        <option value="newest">Сначала новые</option>
+                                        <option value="oldest">Сначала старые</option>
+                                        <option value="name">По названию</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="library-items">
+                                <div class="library-item">
+                                    <div class="library-item-image">
+                                        <img src="{{ url_for('static', filename='images/cs2.jpg') }}" alt="CS2 Master">
+                                    </div>
+                                    <div class="library-item-details">
+                                        <h4>CS2 Master</h4>
+                                        <p>Версия: 2.4.1</p>
+                                        <span class="library-item-status active">Активен</span>
+                                    </div>
+                                    <div class="library-item-actions">
+                                        <button class="library-download-btn">Скачать</button>
+                                        <button class="library-update-btn">Обновить</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="library-item">
+                                    <div class="library-item-image">
+                                        <img src="{{ url_for('static', filename='images/rust.jpg') }}" alt="Rust Pro">
+                                    </div>
+                                    <div class="library-item-details">
+                                        <h4>Rust Pro - Аимбот</h4>
+                                        <p>Версия: 1.8.3</p>
+                                        <span class="library-item-status active">Активен</span>
+                                    </div>
+                                    <div class="library-item-actions">
+                                        <button class="library-download-btn">Скачать</button>
+                                        <button class="library-update-btn">Обновить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Purchases Section -->
+                    <section id="purchases" class="account-section">
+                        <h1 class="section-title">Мои покупки</h1>
+                        <div class="purchases-container">
+                            <div class="purchase-item">
+                                <div class="purchase-icon"><i class="fas fa-gamepad"></i></div>
+                                <div class="purchase-details">
+                                    <h4>CS2 Master</h4>
+                                    <p>Подписка: 30 дней</p>
+                                    <span class="purchase-date">12.05.2023</span>
+                                    <span class="purchase-price">4200 ₽</span>
+                                </div>
+                                <div class="purchase-actions">
+                                    <button class="purchase-download-btn">Скачать</button>
+                                    <button class="purchase-extend-btn">Продлить</button>
+                                </div>
+                            </div>
+                            
+                            <div class="purchase-item">
+                                <div class="purchase-icon"><i class="fas fa-crosshairs"></i></div>
+                                <div class="purchase-details">
+                                    <h4>Rust Pro - Аимбот</h4>
+                                    <p>Модуль: бессрочная лицензия</p>
+                                    <span class="purchase-date">01.03.2023</span>
+                                    <span class="purchase-price">1500 ₽</span>
+                                </div>
+                                <div class="purchase-actions">
+                                    <button class="purchase-download-btn">Скачать</button>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                     
                     <!-- Settings Section -->
                     <section id="settings" class="account-section">
-                        <h1 class="section-title">Настройки аккаунта</h1>
+                        <h1 class="section-title">Настройки профиля</h1>
                         <form class="settings-form">
                             <div class="form-group">
                                 <label for="display-name">Отображаемое имя</label>
@@ -249,71 +420,61 @@
                     
                     <!-- Appearance Section -->
                     <section id="appearance" class="account-section">
-                        <h1 class="section-title">Настройки внешнего вида</h1>
+                        <h1 class="section-title">Основные настройки внешнего вида</h1>
                         <div class="settings-form">
                             <div class="form-group">
                                 <label>Тема</label>
                                 <div class="toggle-container">
                                     <label class="toggle">
-                                        <input type="checkbox" id="theme-toggle" checked>
+                                        <input type="checkbox" id="theme-toggle">
                                         <span class="toggle-slider"></span>
                                     </label>
-                                    <span>Тёмная тема</span>
+                                    <span>Светлая тема</span>
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label>Размер текста</label>
-                                <div class="slider-container">
-                                    <label for="titleSize">Размер заголовков:</label>
-                                    <input type="range" id="titleSize" min="80" max="120" step="5" value="100">
-                                    <span id="titleSize-value">100%</span>
-                                </div>
-                                <div class="slider-container">
-                                    <label for="subtitleSize">Размер подзаголовков:</label>
-                                    <input type="range" id="subtitleSize" min="80" max="120" step="5" value="100">
-                                    <span id="subtitleSize-value">100%</span>
-                                </div>
-                                <div class="slider-container">
-                                    <label for="bodyTextSize">Размер обычного текста:</label>
-                                    <input type="range" id="bodyTextSize" min="80" max="120" step="5" value="100">
-                                    <span id="bodyTextSize-value">100%</span>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Цветовая схема</label>
+                                <label>Основные цвета</label>
                                 <div class="color-options">
                                     <div class="color-option">
-                                        <label for="headerColor">Цвет шапки:</label>
-                                        <input type="text" id="headerColor" class="color-picker" value="#FFA600">
+                                        <label for="accentColor">Основной акцент:</label>
+                                        <div id="accent-color-picker" class="color-picker"></div>
                                     </div>
                                     <div class="color-option">
-                                        <label for="backgroundColor">Цвет фона:</label>
-                                        <input type="text" id="backgroundColor" class="color-picker" value="#000000">
-                                    </div>
-                                    <div class="color-option">
-                                        <label for="textColor">Цвет текста:</label>
-                                        <input type="text" id="textColor" class="color-picker" value="#FFFFFF">
-                                    </div>
-                                    <div class="color-option">
-                                        <label for="accentColor">Акцентный цвет:</label>
-                                        <input type="text" id="accentColor" class="color-picker" value="#FFA600">
+                                        <label for="backgroundColor">Фон:</label>
+                                        <div id="bg-color-picker" class="color-picker"></div>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label>Анимация</label>
+                                <label>Настройки элементов</label>
                                 <div class="slider-container">
-                                    <label for="waveSpeed">Скорость волн:</label>
-                                    <input type="range" id="waveSpeed" min="0" max="100" step="1" value="50">
-                                    <span id="waveSpeed-value">50</span>
+                                    <label for="elementSize">Размер элементов:</label>
+                                    <div class="slider-with-value">
+                                        <input type="range" id="elementSize" min="0" max="100" step="1" value="50">
+                                        <div class="value-input">
+                                            <input type="number" id="elementSizeValue" min="0" max="100" value="50">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="slider-container">
-                                    <label for="starSpeed">Скорость частиц фона:</label>
-                                    <input type="range" id="starSpeed" min="0" max="100" step="1" value="50">
-                                    <span id="starSpeed-value">50</span>
+                                    <label for="elementSpacing">Отступы между элементами:</label>
+                                    <div class="slider-with-value">
+                                        <input type="range" id="elementSpacing" min="0" max="100" step="1" value="50">
+                                        <div class="value-input">
+                                            <input type="number" id="elementSpacingValue" min="0" max="100" value="50">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slider-container">
+                                    <label for="borderRadius">Скругление углов:</label>
+                                    <div class="slider-with-value">
+                                        <input type="range" id="borderRadius" min="0" max="100" step="1" value="50">
+                                        <div class="value-input">
+                                            <input type="number" id="borderRadiusValue" min="0" max="100" value="50">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -335,24 +496,19 @@
                                 </div>
                             </div>
                             
-                            <button type="button" id="save-appearance" class="save-btn">Сохранить настройки</button>
-                            <button type="button" id="reset-appearance" class="reset-btn">Сбросить настройки</button>
-                        </div>
-                    </section>
-                    
-                    <!-- Purchases Section -->
-                    <section id="purchases" class="account-section">
-                        <h1 class="section-title">Мои покупки</h1>
-                        <div class="purchases-container">
-                            <p class="no-items-message">История покупок будет отображаться здесь</p>
-                        </div>
-                    </section>
-                    
-                    <!-- Library Section -->
-                    <section id="library" class="account-section">
-                        <h1 class="section-title">Библиотека читов</h1>
-                        <div class="library-container">
-                            <p class="no-items-message">Приобретенные читы будут отображаться здесь</p>
+                            <div class="save-notice">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Изменения вступят в силу после сохранения и перезагрузки страницы.</span>
+                            </div>
+                            
+                            <a href="/customize" class="advanced-customize-btn">
+                                <i class="fas fa-sliders-h"></i> Расширенная настройка
+                            </a>
+                            
+                            <div class="buttons-container">
+                                <button type="button" id="save-appearance" class="save-btn">Сохранить настройки</button>
+                                <button type="button" id="reset-appearance" class="reset-btn">Сбросить настройки</button>
+                            </div>
                         </div>
                     </section>
                     
@@ -389,6 +545,33 @@
                                     <span>Включить двухфакторную аутентификацию</span>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label>Сессии и устройства</label>
+                                <div class="sessions-list">
+                                    <div class="session-item">
+                                        <div class="session-info">
+                                            <i class="fas fa-desktop"></i>
+                                            <div>
+                                                <h4>Windows 10 - Chrome</h4>
+                                                <p>Текущая сессия - IP: 192.168.1.1</p>
+                                            </div>
+                                        </div>
+                                        <button class="session-end-btn" disabled>Текущая</button>
+                                    </div>
+                                    
+                                    <div class="session-item">
+                                        <div class="session-info">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <div>
+                                                <h4>Android - Chrome Mobile</h4>
+                                                <p>Активна с 15.05.2023 - IP: 192.168.1.100</p>
+                                            </div>
+                                        </div>
+                                        <button class="session-end-btn">Завершить</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </section>
                     
@@ -413,7 +596,104 @@
                                     <textarea id="support-message" rows="6" placeholder="Опишите вашу проблему подробно..."></textarea>
                                 </div>
                                 
+                                <div class="form-group">
+                                    <label>Прикрепить файлы</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="support-files" multiple>
+                                        <label for="support-files">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <span>Выберите файлы</span>
+                                        </label>
+                                    </div>
+                                    <div class="file-list"></div>
+                                </div>
+                                
                                 <button type="button" id="send-support" class="save-btn">Отправить запрос</button>
+                            </div>
+                            
+                            <div class="past-tickets">
+                                <h2>История обращений</h2>
+                                <div class="ticket-list">
+                                    <div class="ticket-item">
+                                        <div class="ticket-status closed">Закрыт</div>
+                                        <div class="ticket-info">
+                                            <h4>Проблема с активацией CS2 Master</h4>
+                                            <p>10.05.2023 - #125478</p>
+                                        </div>
+                                        <button class="ticket-view-btn">Просмотр</button>
+                                    </div>
+                                    
+                                    <div class="ticket-item">
+                                        <div class="ticket-status open">Открыт</div>
+                                        <div class="ticket-info">
+                                            <h4>Вопрос по оплате</h4>
+                                            <p>15.05.2023 - #125623</p>
+                                        </div>
+                                        <button class="ticket-view-btn">Просмотр</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Contact Section -->
+                    <section id="contact" class="account-section">
+                        <h1 class="section-title">Связаться с нами</h1>
+                        <div class="contact-container">
+                            <div class="contact-info">
+                                <div class="contact-card">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h3>Email</h3>
+                                        <p>support@lefaton-cheats.com</p>
+                                        <a href="mailto:support@lefaton-cheats.com" class="contact-link">Написать на почту</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-card">
+                                    <div class="contact-icon">
+                                        <i class="fab fa-discord"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h3>Discord</h3>
+                                        <p>Официальный сервер Lefaton</p>
+                                        <a href="https://discord.gg/lefaton" target="_blank" class="contact-link">Присоединиться</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-card">
+                                    <div class="contact-icon">
+                                        <i class="fab fa-telegram"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h3>Telegram</h3>
+                                        <p>Канал поддержки и новостей</p>
+                                        <a href="https://t.me/lefaton" target="_blank" class="contact-link">Подписаться</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="feedback-form settings-form">
+                                <h2>Форма обратной связи</h2>
+                                <div class="form-group">
+                                    <label for="feedback-type">Тип обращения</label>
+                                    <select id="feedback-type">
+                                        <option value="">Выберите тип</option>
+                                        <option value="suggestion">Предложение</option>
+                                        <option value="feedback">Отзыв о продукте</option>
+                                        <option value="partnership">Предложение сотрудничества</option>
+                                        <option value="other">Другое</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="feedback-message">Сообщение</label>
+                                    <textarea id="feedback-message" rows="6" placeholder="Напишите ваше сообщение..."></textarea>
+                                </div>
+                                
+                                <button type="button" id="send-feedback" class="save-btn">Отправить</button>
                             </div>
                         </div>
                     </section>
@@ -422,13 +702,60 @@
         </div>
     </main>
 
+    <!-- JavaScript -->
+    <!-- Pickr library -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    
     <!-- Particles.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Spectrum color picker library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
-    <script src="../static/js/mainpage_background.js"></script>
-    <script src="../static/js/theme-switcher.js"></script>
-    <script src="../static/js/account.js"></script>
+    
+    <!-- Core modules -->
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/background.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    
+    <!-- Page-specific module -->
+    <script src="{{ url_for('static', filename='js/account.js') }}"></script>
+    
+    <!-- Main initialization -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu_toggle');
+            const navLinks = document.querySelector('.nav_links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                    
+                    // Toggle icon between bars and X
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('fa-bars')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                const navButtons = navLinks.querySelectorAll('.header_btn');
+                navButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (window.innerWidth <= 768) {
+                            navLinks.classList.remove('open');
+                            const icon = menuToggle.querySelector('i');
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html> 

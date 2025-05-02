@@ -1,0 +1,110 @@
+/* CSS Variables for Lefaton Cheat */
+
+:root {
+    /* Base Colors */
+    --header-color: #7c5cff;
+    --background-color: #000000;
+    --accent-color: #7c5cff;
+    --text-color: #ffffff;
+    
+    /* Color variants */
+    --accent-hover: #9b82ff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --card-bg: rgba(18, 18, 18, 0.8);
+    --card-border: rgba(255, 255, 255, 0.05);
+    
+    /* Font sizes */
+    --title-font-size: 24px;
+    --subtitle-font-size: 18px;
+    --body-font-size: 16px;
+    
+    /* Borders */
+    --border-radius: 10px;
+    
+    /* Animation */
+    --transition-speed: 0.3s;
+    --wave-animation-duration: 15s;
+    
+    /* Wave colors (based on header-color) */
+    --wave-color-1: rgba(255, 149, 0, 1);
+    --wave-color-2: rgba(255, 149, 0, 1);
+    --wave-color-3: rgba(255, 149, 0, 1);
+    --wave-color-4: rgba(255, 149, 0, 1);
+    
+    /* Convert RGB values for JS calculations */
+    --accent-color-rgb: 124, 92, 255;
+}
+
+/* Theme variations */
+[data-theme="dark"] {
+    --card-bg: rgba(18, 18, 18, 0.8);
+    --card-border: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] {
+    --card-bg: rgba(245, 245, 245, 0.8);
+    --card-border: rgba(0, 0, 0, 0.05);
+    --text-secondary: rgba(0, 0, 0, 0.7);
+}
+
+/* Background variations */
+[data-background="stars"] {
+    /* Stars specific styles */
+}
+
+[data-background="particles"] {
+    /* Particles specific styles */
+}
+
+[data-background="gradient"] {
+    /* Gradient specific styles */
+}
+
+/* Apply size factor to elements */
+.card, .stat-card, .activity-item, .product-card, button, 
+.nav-item, .form-group, input, select, textarea {
+    transform: scale(var(--element-size-factor, 1));
+    transform-origin: center left;
+}
+
+/* Apply spacing dynamically */
+.account-content, .settings-form, .form-group, .color-options,
+.background-options, .slider-container {
+    gap: var(--element-spacing, 15px);
+}
+
+/* Apply border radius dynamically */
+.card, .btn, .button, .stat-card, .activity-item, .product-card,
+input, select, textarea, button, .color-picker, .toggle,
+.save-notice, .success-message {
+    border-radius: var(--border-radius, 10px);
+}
+
+/* For accent colors from color palettes - these will be dynamically updated */
+[data-accent-color="#3498db"] {
+    --accent-color-rgb: 52, 152, 219;
+}
+
+[data-accent-color="#e74c3c"] {
+    --accent-color-rgb: 231, 76, 60;
+}
+
+[data-accent-color="#9b59b6"] {
+    --accent-color-rgb: 155, 89, 182;
+}
+
+[data-accent-color="#8e44ad"] {
+    --accent-color-rgb: 142, 68, 173;
+}
+
+[data-accent-color="#cd412b"] {
+    --accent-color-rgb: 205, 65, 43;
+}
+
+[data-accent-color="#00a9e0"] {
+    --accent-color-rgb: 0, 169, 224;
+}
+
+[data-accent-color="#c9a45b"] {
+    --accent-color-rgb: 201, 164, 91;
+} 

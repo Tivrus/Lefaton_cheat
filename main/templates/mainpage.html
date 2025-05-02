@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lefaton cheats</title>
-    <link rel="stylesheet" href="../static/css/mainpage.css">
-    <link rel="stylesheet" href="../static/css/mainpage_header.css">
-    <link rel="stylesheet" href="../static/css/mainpage_background.css">
-    <link rel="stylesheet" href="../static/css/mainpage_main_title_text.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_main_title_text.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         @keyframes gradient {
             0% { background-position: 0% 50%; }
@@ -21,73 +25,107 @@
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
         }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 30, 45, 0.2);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(124, 92, 255, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(124, 92, 255, 0.8);
+        }
+        
+        /* Glow effect for elements */
+        .glow-effect {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(124, 92, 255, 0.2) 0%, rgba(124, 92, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
     </style>
 </head>
 <body>
     <header>
         <!-- Content Container -->
         <div class="header_content">
-            <div class="left_side_header">
-                <a href="/main" class="home_btn_logo_header"><img src="../static/images/logo.svg" alt=""></a>
-                <a href="/catalog" class="left_side_header_btn_catalog">
-                    <section>
-                        Арсенал читов
-                    </section>
-                </a>
-                <a href="" class="left_side_header_btn_community">
-                    <section>
-                        Страница сообщества
-                    </section>
-                </a>
-                <a href="" class="left_side_header_btn_support">
-                    <section>
-                        Техподдержка
-                    </section>
-                </a>
-                <a href="" class="left_side_header_btn_faq">
-                    <section>
-                        FAQ
-                    </section>
-                </a>
-                <a href="" class="left_side_header_btn_updates">
-                    <section>
-                        Обновления
-                    </section>
-                </a>
-                <a href="" class="left_side_header_btn_upcoming">
-                    <section>
-                        Скоро в продаже
-                    </section>
-                </a>
-            </div>
-            <div class="right_side_header">
-                <a href="/account" class="right_side_header_bth_account">
-                    <section>
-                        Аккаунт
-                    </section>
-                </a>
+            <div class="unified_header">
+                <a href="/main" class="home_btn_logo_header"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Lefaton Logo"></a>
+                <div class="nav_links">
+                    <a href="/catalog" class="header_btn">
+                        <section>
+                            <i class="fas fa-gamepad"></i> Арсенал читов
+                        </section>
+                    </a>
+                    <a href="/community" class="header_btn">
+                        <section>
+                            <i class="fas fa-users"></i> Сообщество
+                        </section>
+                    </a>
+                    <a href="/support" class="header_btn">
+                        <section>
+                            <i class="fas fa-headset"></i> Техподдержка
+                        </section>
+                    </a>
+                    <a href="/faq" class="header_btn">
+                        <section>
+                            <i class="fas fa-question-circle"></i> FAQ
+                        </section>
+                    </a>
+                    <a href="/updates" class="header_btn">
+                        <section>
+                            <i class="fas fa-sync-alt"></i> Обновления
+                        </section>
+                    </a>
+                    <a href="/upcoming" class="header_btn">
+                        <section>
+                            <i class="fas fa-clock"></i> Скоро в продаже
+                        </section>
+                    </a>
+                    <a href="/account" class="header_btn account_btn">
+                        <section>
+                            <i class="fas fa-user"></i> Аккаунт
+                        </section>
+                    </a>
+                </div>
+                <div class="menu_toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
         <!-- Content end -->
          
         <!-- Waves Container -->
-        <div>
+        <div class="waves-container">
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  viewBox="0 0 1440 100" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+                  viewBox="0 0 1440 100" preserveAspectRatio="none" shape-rendering="auto">
                 <defs>
-                    <!-- Smoother wave path with more control points -->
-                    <path id="wave-path" d="M0,40 C160,20 240,80 400,40 C560,0 720,80 880,50 C1040,20 1200,0 1360,40 L1440,100 L0,100 Z" />
+                    <!-- Бесшовный путь с одинаковыми начальной и конечной точками -->
+                    <path id="wave-path" d="M0,40 C180,20 360,80 720,40 C1080,0 1260,60 1440,40 L1440,100 L0,100 Z" />
                 </defs>
                 <g class="parallax">
-                    <!-- Use the new smoother wave path -->
-                    <use class="wave1" xlink:href="#wave-path" x="0" y="0"/>
-                    <use class="wave1" xlink:href="#wave-path" x="1440" y="0"/>
-                    <use class="wave2" xlink:href="#wave-path" x="0" y="10"/>
-                    <use class="wave2" xlink:href="#wave-path" x="1440" y="10"/>
-                    <use class="wave3" xlink:href="#wave-path" x="0" y="15"/>
-                    <use class="wave3" xlink:href="#wave-path" x="1440" y="15"/>
-                    <use class="wave4" xlink:href="#wave-path" x="0" y="20"/>
-                    <use class="wave4" xlink:href="#wave-path" x="1440" y="20"/>
+                    <use class="wave1_1" xlink:href="#wave-path" x="0" y="0"/>
+                    <use class="wave1_2" xlink:href="#wave-path" x="1440" y="0"/>
+
+                    <use class="wave2_1" xlink:href="#wave-path" x="0" y="15"/>
+                    <use class="wave2_2" xlink:href="#wave-path" x="1440" y="15"/>
+
+                    <use class="wave3_1" xlink:href="#wave-path" x="0" y="22"/>
+                    <use class="wave3_2" xlink:href="#wave-path" x="1440" y="22"/>
+
+                    <use class="wave4_1" xlink:href="#wave-path" x="0" y="27"/>
+                    <use class="wave4_2" xlink:href="#wave-path" x="1440" y="27"/>
                 </g>
             </svg>
         </div>
@@ -98,6 +136,10 @@
             <!-- Particles Background -->
             <div id="particles-background" class="vertical-centered-box"></div>
             <div id="particles-foreground" class="vertical-centered-box"></div>
+
+            <!-- Decorative glow effects -->
+            <div class="glow-effect" style="top: 20%; left: 15%;"></div>
+            <div class="glow-effect" style="bottom: 30%; right: 10%;"></div>
 
             <!-- Content on Top -->
             <div class="content_on_top">
@@ -116,13 +158,95 @@
                         <i class="fas fa-user"></i> Личный кабинет
                     </a>
                 </div>
+                
+                <!-- Feature highlights -->
+                <div class="features-container">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Безопасность</h3>
+                        <p>Все наши продукты регулярно обновляются и проходят тщательное тестирование</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Производительность</h3>
+                        <p>Оптимизированные решения, не влияющие на FPS вашей игры</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Поддержка 24/7</h3>
+                        <p>Наша команда всегда готова помочь с любыми вопросами</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
     <!-- Particles.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="../static/js/mainpage_background.js"></script>
-    <script src="../static/js/theme-switcher.js"></script>
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/background.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- Custom script for interactive elements -->
+    <script>
+        // Add dynamic glow effect that follows cursor
+        document.addEventListener('mousemove', function(e) {
+            const glowElements = document.querySelectorAll('.glow-effect');
+            
+            // Move the first glow element with cursor at reduced speed (parallax effect)
+            if (glowElements.length > 0) {
+                glowElements[0].style.transform = `translate(${e.clientX/15}px, ${e.clientY/15}px)`;
+            }
+            
+            // Move the second glow in opposite direction
+            if (glowElements.length > 1) {
+                glowElements[1].style.transform = `translate(${-e.clientX/20}px, ${-e.clientY/20}px)`;
+            }
+        });
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu_toggle');
+            const navLinks = document.querySelector('.nav_links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                    
+                    // Toggle icon between bars and X
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('fa-bars')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                const navButtons = navLinks.querySelectorAll('.header_btn');
+                navButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (window.innerWidth <= 768) {
+                            navLinks.classList.remove('open');
+                            const icon = menuToggle.querySelector('i');
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -2,30 +2,80 @@
   z-index: 2;
 }
 
-
 .main_title_text{
-  color: rgb(193, 190, 205);
-  font-size: 35px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 48px;
   font-family: 'Ubuntu', Arial, sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   display: inline-block;
-  max-width: 600px;
-  margin: 0;
+  max-width: 800px;
+  margin: 0 auto 20px;
   z-index: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
-
 
 .main_title_text .main_title{
-  color: rgb(255, 183, 0);
+  background: linear-gradient(90deg, #7c5cff, #a183ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
 }
 
+.main_title_text .main_title::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #7c5cff, #a183ff);
+  border-radius: 5px;
+  transform: translateY(10px);
+  opacity: 0.7;
+}
 
 .main_subtitle{
-  color: rgb(146, 150, 169);
-  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
   font-family: 'Ubuntu', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
   display: inline-block;
   max-width: 700px;
-  margin: 0;
+  margin: 30px auto 0;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Light theme adjustments */
+[data-theme="light"] .main_title_text {
+  color: #2a2a3a;
+  text-shadow: 0 2px 10px rgba(124, 92, 255, 0.1);
+}
+
+[data-theme="light"] .main_subtitle {
+  color: rgba(50, 50, 70, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main_title_text {
+    font-size: 36px;
+  }
+  
+  .main_subtitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main_title_text {
+    font-size: 32px;
+  }
+  
+  .main_subtitle {
+    font-size: 18px;
+  }
 }

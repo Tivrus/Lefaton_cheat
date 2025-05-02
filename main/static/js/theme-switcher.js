@@ -29,10 +29,41 @@ document.addEventListener('DOMContentLoaded', function() {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
         }
+        
+        // Apply theme-specific particle colors
+        updateParticleColors(e.target.checked ? 'light' : 'dark');
     }
     
     // Event listener for theme switch
     themeSwitch.addEventListener('change', switchTheme, false);
+    
+    // Function to update particle colors based on theme
+    function updateParticleColors(theme) {
+        try {
+            if (window.pJSDom && window.pJSDom.length > 0) {
+                const particleColor = theme === 'light' ? '#7c5cff' : '#ffffff';
+                const particleOpacity = theme === 'light' ? 0.6 : 0.8;
+                
+                // Update background particles
+                if (window.pJSDom[0] && window.pJSDom[0].pJS) {
+                    window.pJSDom[0].pJS.particles.color.value = particleColor;
+                    window.pJSDom[0].pJS.particles.opacity.value = particleOpacity;
+                    window.pJSDom[0].pJS.particles.line_linked.color = particleColor;
+                    window.pJSDom[0].pJS.fn.particlesRefresh();
+                }
+                
+                // Update foreground particles if they exist
+                if (window.pJSDom[1] && window.pJSDom[1].pJS) {
+                    window.pJSDom[1].pJS.particles.color.value = particleColor;
+                    window.pJSDom[1].pJS.particles.opacity.value = particleOpacity;
+                    window.pJSDom[1].pJS.particles.line_linked.color = particleColor;
+                    window.pJSDom[1].pJS.fn.particlesRefresh();
+                }
+            }
+        } catch (e) {
+            console.error("Error updating particle colors:", e);
+        }
+    }
     
     // Function to apply custom theme colors from localStorage
     function applyCustomTheme() {
@@ -42,48 +73,55 @@ document.addEventListener('DOMContentLoaded', function() {
                 const settings = JSON.parse(customSettings);
                 console.log("Applying custom settings:", settings);
                 
+                // Set default accent color to match the new design
+                const defaultAccentColor = '#7c5cff';
+                
                 // Apply saved colors using CSS variables
                 if (settings.headerColor) {
                     document.documentElement.style.setProperty('--header-color', settings.headerColor);
+                    document.documentElement.style.setProperty('--accent-color', settings.headerColor);
+                    
+                    // Update gradient for buttons and elements
+                    const lighterColor = adjustColorBrightness(settings.headerColor, 20);
+                    document.documentElement.style.setProperty('--gradient-primary', 
+                        `linear-gradient(135deg, ${settings.headerColor}, ${lighterColor})`);
+                    
                     // Update wave colors with transparency
-                    document.documentElement.style.setProperty('--wave-color-1', hexToRgba(settings.headerColor, 0.7)); // 70% opacity
-                    document.documentElement.style.setProperty('--wave-color-2', hexToRgba(settings.headerColor, 0.5)); // 50% opacity
-                    document.documentElement.style.setProperty('--wave-color-3', hexToRgba(settings.headerColor, 0.3)); // 30% opacity
+                    document.documentElement.style.setProperty('--wave-color-1', hexToRgba(settings.headerColor, 0.7)); 
+                    document.documentElement.style.setProperty('--wave-color-2', hexToRgba(settings.headerColor, 0.5));
+                    document.documentElement.style.setProperty('--wave-color-3', hexToRgba(settings.headerColor, 0.3));
                     document.documentElement.style.setProperty('--wave-color-4', settings.headerColor);
+                    
+                    // Update glow color
+                    document.documentElement.style.setProperty('--glow-color', hexToRgba(settings.headerColor, 0.3));
+                } else {
+                    // Set default values if nothing saved
+                    document.documentElement.style.setProperty('--header-color', defaultAccentColor);
+                    document.documentElement.style.setProperty('--accent-color', defaultAccentColor);
                 }
                 
                 if (settings.backgroundColor) {
-                    document.body.style.backgroundColor = settings.backgroundColor;
+                    const darkerBg = adjustColorBrightness(settings.backgroundColor, -15);
+                    const lighterBg = adjustColorBrightness(settings.backgroundColor, 15);
+                    
+                    document.documentElement.style.setProperty('--background-color', settings.backgroundColor);
+                    document.documentElement.style.setProperty('--gradient-start', lighterBg);
+                    document.documentElement.style.setProperty('--gradient-end', darkerBg);
                 }
                 
                 if (settings.textColor) {
                     document.documentElement.style.setProperty('--text-color', settings.textColor);
-                    // Apply to main text elements
-                    const mainTexts = document.querySelectorAll('.main_title, .main_subtitle, p, h1, h2, h3, h4, h5, h6');
-                    mainTexts.forEach(el => {
-                        if (el) el.style.color = settings.textColor;
-                    });
                 }
                 
                 // Apply font sizes
                 if (settings.titleSize) {
-                    const fontSize = 24 + ((parseInt(settings.titleSize) / 100) * 36);
+                    const fontSize = 32 + ((parseInt(settings.titleSize) / 100) * 20);
                     document.documentElement.style.setProperty('--title-font-size', fontSize + 'px');
-                    
-                    const mainTitle = document.querySelector('.main_title');
-                    if (mainTitle) {
-                        mainTitle.style.fontSize = fontSize + 'px';
-                    }
                 }
                 
                 if (settings.subtitleSize) {
-                    const fontSize = 16 + ((parseInt(settings.subtitleSize) / 100) * 14);
+                    const fontSize = 18 + ((parseInt(settings.subtitleSize) / 100) * 14);
                     document.documentElement.style.setProperty('--subtitle-font-size', fontSize + 'px');
-                    
-                    const subtitle = document.querySelector('.main_subtitle');
-                    if (subtitle) {
-                        subtitle.style.fontSize = fontSize + 'px';
-                    }
                 }
                 
                 // Apply body text size if available
@@ -150,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Helper function for color manipulations
     function hexToRgba(hex, alpha = 1) {
-        if (!hex) return "rgba(255, 166, 0, " + alpha + ")"; 
+        if (!hex) return "rgba(124, 92, 255, " + alpha + ")"; 
         
         try {
             const r = parseInt(hex.slice(1, 3), 16);
@@ -159,12 +197,38 @@ document.addEventListener('DOMContentLoaded', function() {
             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
         } catch (e) {
             console.error("Error parsing color:", hex, e);
-            return "rgba(255, 166, 0, " + alpha + ")";
+            return "rgba(124, 92, 255, " + alpha + ")";
+        }
+    }
+    
+    // Helper function to adjust color brightness
+    function adjustColorBrightness(hex, percent) {
+        if (!hex) return '#7c5cff';
+        
+        try {
+            // Convert hex to RGB
+            let r = parseInt(hex.slice(1, 3), 16);
+            let g = parseInt(hex.slice(3, 5), 16);
+            let b = parseInt(hex.slice(5, 7), 16);
+            
+            // Adjust brightness
+            r = Math.max(0, Math.min(255, r + (percent / 100) * 255));
+            g = Math.max(0, Math.min(255, g + (percent / 100) * 255));
+            b = Math.max(0, Math.min(255, b + (percent / 100) * 255));
+            
+            // Convert back to hex
+            return `#${Math.round(r).toString(16).padStart(2, '0')}${Math.round(g).toString(16).padStart(2, '0')}${Math.round(b).toString(16).padStart(2, '0')}`;
+        } catch (e) {
+            console.error("Error adjusting color brightness:", hex, e);
+            return '#7c5cff';
         }
     }
     
     // Apply custom theme when page loads
     applyCustomTheme();
+    
+    // Also update particles based on current theme
+    updateParticleColors(currentTheme);
     
     // Create and dispatch a custom event for settings changes
     function dispatchSettingsChanged() {

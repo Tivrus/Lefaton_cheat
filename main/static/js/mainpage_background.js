@@ -105,6 +105,7 @@
             this.parallaxOffsetY = 0;
             this.position = { x: Math.ceil(Math.random() * r.width), y: Math.ceil(Math.random() * r.height) }; // Начальная позиция
             this.speed = {};
+            this.size = Math.random() * 2 + 1; // Randomize particle size for more visual interest
 
             // Установка скорости по X
             switch (g.directionX) {
@@ -131,6 +132,9 @@
                     this.speed.y = +(-g.maxSpeedY / 2 + Math.random() * g.maxSpeedY).toFixed(2);
                     this.speed.x += this.speed.y > 0 ? g.minSpeedY : -g.minSpeedY;
             }
+            
+            // Assign a random opacity to each particle for depth effect
+            this.opacity = Math.random() * 0.5 + 0.3;
         }
 
         // Геттер/сеттер опций
@@ -156,18 +160,42 @@
             
         // Метод отрисовки частицы
         n.prototype.draw = function() {
+            // Set the particle's opacity to create depth effect
+            s.globalAlpha = this.opacity;
+            
+            // Draw the particle with its custom size
             s.beginPath();
-            s.arc(this.position.x + this.parallaxOffsetX, this.position.y + this.parallaxOffsetY, g.particleRadius / 2, 0, 2 * Math.PI, !0);
+            s.arc(this.position.x + this.parallaxOffsetX, this.position.y + this.parallaxOffsetY, 
+                 (g.particleRadius / 2) * this.size, 0, 2 * Math.PI, !0);
             s.closePath();
             s.fill();
+            
+            // Reset opacity for lines
+            s.globalAlpha = 0.7;
+            
+            // Draw connecting lines
             s.beginPath();
             for (var a = z.length - 1; a > this.stackPos; a--) {
                 var b = z[a], c = this.position.x - b.position.x, d = this.position.y - b.position.y, e = Math.sqrt(c * c + d * d).toFixed(2);
                 // Рисование линий между близкими частицами
-                e < g.proximity && (s.moveTo(this.position.x + this.parallaxOffsetX, this.position.y + this.parallaxOffsetY), g.curvedLines ? s.quadraticCurveTo(Math.max(b.position.x, b.position.x), Math.min(b.position.y, b.position.y), b.position.x + b.parallaxOffsetX, b.position.y + b.parallaxOffsetY) : s.lineTo(b.position.x + b.parallaxOffsetX, b.position.y + b.parallaxOffsetY));
+                if (e < g.proximity) {
+                    // Calculate line opacity based on distance
+                    var lineOpacity = 1 - (e / g.proximity);
+                    s.strokeStyle = g.lineColor.replace('rgba(', 'rgba(').replace(')', ',' + lineOpacity + ')');
+                    
+                    s.moveTo(this.position.x + this.parallaxOffsetX, this.position.y + this.parallaxOffsetY);
+                    g.curvedLines ? s.quadraticCurveTo(Math.max(b.position.x, b.position.x), 
+                                                     Math.min(b.position.y, b.position.y), 
+                                                     b.position.x + b.parallaxOffsetX, 
+                                                     b.position.y + b.parallaxOffsetY) 
+                                 : s.lineTo(b.position.x + b.parallaxOffsetX, b.position.y + b.parallaxOffsetY);
+                }
              }
             s.stroke();
             s.closePath();
+            
+            // Reset global alpha
+            s.globalAlpha = 1;
         };
 
         // Метод обновления позиции частицы
@@ -214,6 +242,7 @@
                     (this.position.y + this.speed.y + this.parallaxOffsetY > e || this.position.y + this.speed.y + this.parallaxOffsetY < 0) && (this.speed.y = -this.speed.y);
             }
 
+            // Обновление позиции
             this.position.x += this.speed.x;
             this.position.y += this.speed.y;
         };
@@ -223,244 +252,453 @@
             this.stackPos = a;
         };
 
+        // Подготовка параметров и вызов h()
         h();
 
-        return {
-            option: o,
-            destroy: p,
-            start: m,
-            pause: l
+        // Публичные методы и свойства
+        var H = {
+            option: o, destroy: p, start: m, pause: l
         };
+
+        return H;
     }
 
-    var e = "particleground", f = a.jQuery;
-
-    // Главная функция инициализации
+    // Поддержка AMD и CommonJS
+    var e = "particleground";
     a[e] = function(a, b) {
         return new d(a, b);
     };
 
-    // Значения по умолчанию
     a[e].defaults = {
-        minSpeedX: .1,
-        maxSpeedX: .7,
-        minSpeedY: .1,
-        maxSpeedY: .7,
+        minSpeedX: 0.1,
+        maxSpeedX: 0.7,
+        minSpeedY: 0.1,
+        maxSpeedY: 0.7,
         directionX: "center",
         directionY: "center",
-        density: 1e4,
-        dotColor: "#666666",
-        lineColor: "#666666",
+        density: 10000,
+        dotColor: "rgba(255, 255, 255, 0.8)",
+        lineColor: "rgba(255, 255, 255, 0.5)",
         particleRadius: 7,
         lineWidth: 1,
-        curvedLines: !1,
+        curvedLines: false,
         proximity: 100,
-        parallax: !0,
+        parallax: true,
         parallaxMultiplier: 5,
         onInit: function() {},
         onDestroy: function() {}
     };
 
-    // Интеграция с jQuery
-    f && (f.fn[e] = function(a) {
-        if ("string" == typeof arguments[0]) {
-            var b, c = arguments[0], g = Array.prototype.slice.call(arguments, 1);
-            return this.each(function() {
-                f.data(this, "plugin_" + e) && "function" == typeof f.data(this, "plugin_" + e)[c] && (b = f.data(this, "plugin_" + e)[c].apply(this, g));
-            }), void 0 !== b ? b : this;
-        }
-        return "object" != typeof a && a ? void 0 : this.each(function() {
-            f.data(this, "plugin_" + e) || f.data(this, "plugin_" + e, new d(this, a));
+    function initParticles() {
+        // Check if we're in light or dark theme
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        
+        // Set particle colors based on theme
+        const particleColor = currentTheme === 'light' ? 'rgba(124, 92, 255, 0.6)' : 'rgba(255, 255, 255, 0.8)';
+        const lineColor = currentTheme === 'light' ? 'rgba(124, 92, 255, 0.3)' : 'rgba(255, 255, 255, 0.5)';
+        
+        // Background particles (slower, more distant)
+        a.particleground(document.getElementById('particles-background'), {
+            dotColor: particleColor,
+            lineColor: lineColor,
+            minSpeedX: 0.05,
+            maxSpeedX: 0.25,
+            minSpeedY: 0.05,
+            maxSpeedY: 0.25,
+            density: 15000, // Increased density
+            particleRadius: 6,  // Slightly smaller particles
+            lineWidth: 0.5, // Thinner lines
+            proximity: 120,
+            parallaxMultiplier: 20  // More pronounced parallax effect
+        });
+        
+        // Foreground particles (faster, closer)
+        a.particleground(document.getElementById('particles-foreground'), {
+            dotColor: particleColor,
+            lineColor: lineColor,
+            minSpeedX: 0.1,
+            maxSpeedX: 0.35,
+            minSpeedY: 0.1,
+            maxSpeedY: 0.35,
+            density: 30000, // Lower density for fewer particles
+            particleRadius: 4, // Smaller particles
+            lineWidth: 0.5, // Thinner lines
+            proximity: 100,
+            parallaxMultiplier: 8 // Less pronounced parallax effect
+        });
+    }
+
+    // Initialize particles when document is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        initParticles();
+        
+        // Listen for theme changes and reinitialize particles
+        window.addEventListener('customSettingsChanged', function() {
+            // Need to destroy existing particles first
+            try {
+                if (window.pJSDom && window.pJSDom.length > 0) {
+                    window.pJSDom.forEach(function(instance) {
+                        instance.pJS.fn.vendors.destroypJS();
+                    });
+                    window.pJSDom = [];
+                }
+            } catch(e) {
+                console.error("Error destroying particles:", e);
+            }
+            
+            // Reinitialize after a short delay
+            setTimeout(initParticles, 100);
         });
     });
-}(window, document);
 
-// Store particle references for customization
-let particlegroundForeground;
-let particlegroundBackground;
-
-// Function to initialize with custom colors from local storage
-function initParticlesWithCustomSettings() {
-    // Get saved settings
-    const customSettings = localStorage.getItem('customSettings');
-    let starColor = '#FFFFFF';
-    let starSpeed = 50;
-    let starDensity = 50;
-    
-    if (customSettings) {
-        try {
-            const settings = JSON.parse(customSettings);
-            starColor = settings.starColor || starColor;
-            starSpeed = parseInt(settings.starSpeed || starSpeed);
-            starDensity = parseInt(settings.starDensity || starDensity);
-            console.log("Loading custom settings:", settings);
-        } catch (e) {
-            console.error("Error parsing custom settings:", e);
-        }
-    }
-    
-    // Преобразуем значения в соответствии с новой логикой
-    const normalizedSpeed = starSpeed / 100;
-    
-    // Инвертируем плотность: больше значение = больше частиц
-    const fgDensity = 50000 - (starDensity * 200); // 50000 при 0, 10000 при 200
-    const bgDensity = 30000 - (starDensity * 120); // 30000 при 0, 6000 при 200
-    
-    // Устанавливаем скорость в зависимости от значения ползунка
-    let fgMinSpeed, fgMaxSpeed, bgMinSpeed, bgMaxSpeed;
-    
-    if (normalizedSpeed <= 0.01) {
-        // Полная остановка при значении 0
-        fgMinSpeed = 0;
-        fgMaxSpeed = 0;
-        bgMinSpeed = 0;
-        bgMaxSpeed = 0;
-    } else {
-        // Нормальная скорость
-        fgMinSpeed = 0.05 + (normalizedSpeed * 0.2);
-        fgMaxSpeed = 0.15 + (normalizedSpeed * 0.2);
-        bgMinSpeed = 0.0375 + (normalizedSpeed * 0.2);
-        bgMaxSpeed = 0.075 + (normalizedSpeed * 0.2);
-    }
-
-    // Initialize foreground particles with custom settings
-    particlegroundForeground = particleground(document.getElementById('particles-foreground'), {
-        dotColor: starColor,
-        lineColor: hexToRgba(starColor, 0.08),
-        minSpeedX: fgMinSpeed,
-        maxSpeedX: fgMaxSpeed,
-        minSpeedY: fgMinSpeed,
-        maxSpeedY: fgMaxSpeed,
-        density: fgDensity,
-        curvedLines: true,
-        proximity: 150,
-        parallaxMultiplier: 50,
-        particleRadius: 4,
+    // Update particles when the theme changes
+    document.addEventListener('DOMContentLoaded', function() {
+        // Observe data-theme attribute changes 
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'data-theme') {
+                    // Try to update particle colors through pJS API
+                    try {
+                        const theme = document.documentElement.getAttribute('data-theme');
+                        const particleColor = theme === 'light' ? 'rgba(124, 92, 255, 0.6)' : 'rgba(255, 255, 255, 0.8)';
+                        const lineColor = theme === 'light' ? 'rgba(124, 92, 255, 0.3)' : 'rgba(255, 255, 255, 0.5)';
+                        
+                        if (window.pJSDom && window.pJSDom.length > 0) {
+                            // Update background particles
+                            if (window.pJSDom[0] && window.pJSDom[0].pJS) {
+                                window.pJSDom[0].pJS.particles.color.value = particleColor;
+                                window.pJSDom[0].pJS.particles.line_linked.color = lineColor;
+                                window.pJSDom[0].pJS.fn.particlesRefresh();
+                            }
+                            
+                            // Update foreground particles
+                            if (window.pJSDom[1] && window.pJSDom[1].pJS) {
+                                window.pJSDom[1].pJS.particles.color.value = particleColor;
+                                window.pJSDom[1].pJS.particles.line_linked.color = lineColor;
+                                window.pJSDom[1].pJS.fn.particlesRefresh();
+                            }
+                        }
+                    } catch(e) {
+                        console.error("Error updating particle colors:", e);
+                    }
+                }
+            });
+        });
+        
+        observer.observe(document.documentElement, { attributes: true });
     });
 
-    // Initialize background particles with custom settings
-    particlegroundBackground = particleground(document.getElementById('particles-background'), {
-        dotColor: hexToRgba(starColor, 0.5),
-        lineColor: hexToRgba(starColor, 0.08),
-        minSpeedX: bgMinSpeed,
-        maxSpeedX: bgMaxSpeed,
-        minSpeedY: bgMinSpeed,
-        maxSpeedY: bgMaxSpeed,
-        density: bgDensity,
-        curvedLines: true,
-        proximity: 20,
-        parallaxMultiplier: 20,
-        particleRadius: 2,
+    // Background initialization for all pages
+    document.addEventListener('DOMContentLoaded', function() {
+        // Загрузить сохраненные настройки
+        loadSavedSettings();
+        
+        // Инициализировать фон
+        initializeBackground();
     });
-    
-    // Make references available to customize.js
-    window.particlegroundForeground = particlegroundForeground;
-    window.particlegroundBackground = particlegroundBackground;
-    
-    // Make option function available globally
-    window.setParticleOption = function(target, optionName, value) {
-        if (target === 'foreground' && window.particlegroundForeground) {
-            window.particlegroundForeground.option(optionName, value);
-        } else if (target === 'background' && window.particlegroundBackground) {
-            window.particlegroundBackground.option(optionName, value);
-        }
-    };
-    
-    // If setupParticlegroundRefs function exists, call it
-    if (window.setupParticlegroundRefs) {
-        window.setupParticlegroundRefs(particlegroundForeground, particlegroundBackground);
-    }
-    
-    console.log("Particles initialized with custom settings", {starColor, starSpeed, starDensity});
-}
 
-// Convert hex color to rgba
-function hexToRgba(hex, alpha = 1) {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-// Обработчик загрузки DOM
-document.addEventListener("DOMContentLoaded", function () {
-    initParticlesWithCustomSettings();
-    
-    const particlesBackground = document.getElementById("particles-background");
-    const particlesForeground = document.getElementById("particles-foreground");
-  
-    function resizeDivs() {
-        // Use window height for particle backgrounds since they're now fixed position
-        const windowHeight = window.innerHeight;
-        particlesBackground.style.height = `${windowHeight}px`;
-        particlesForeground.style.height = `${windowHeight}px`;
+    // Загрузка сохраненных настроек
+    function loadSavedSettings() {
+        const savedSettingsStr = localStorage.getItem('customSettings');
+        let settings = null;
         
-        // Also update canvas size if needed
-        if (window.particlegroundForeground && window.particlegroundBackground) {
-            // Trigger a resize event to update the particles
-            window.dispatchEvent(new Event('resize'));
-        }
-    }
-  
-    resizeDivs(); // Первоначальная установка высоты
-    window.addEventListener("resize", resizeDivs);
-});
-
-function n() {
-    var e = t ? screen.width : window.innerWidth;
-    window.isMobile && !t && (e = document.documentElement.clientWidth);
-    for (var n = document.querySelectorAll('.r:not([data-record-type="396"]):not([data-record-type="1003"])'), i = [], o = 0; o < n.length; o++) {
-        var r = n[o]
-          , a = getComputedStyle(r);
-        "none" !== a.display && "hidden" !== a.visibility && "0" !== a.opacity && i.push(r)
-    }
-    for (var l = 0; l < i.length; l++)
-        for (var d = i[l], s = d.querySelectorAll('div:not([data-auto-correct-mobile-width="false"]):not(.tn-elem):not(.tn-atom):not(.tn-atom__sbs-anim-wrapper):not(.tn-atom__prx-wrapper):not(.tn-atom__videoiframe):not(.tn-atom__sticky-wrapper):not(.t-store__relevants__container):not(.t-slds__items-wrapper):not(.js-product-controls-wrapper):not(.js-product-edition-option):not(.t-product__option-variants)'), c = 0; c < s.length; c++) {
-            var u = s[c];
-            d.style.wordBreak = "";
-            var m = t_outerWidth(u);
-            if (m > e) {
-                if ("yes" === u.getAttribute("[data-customstyle]") && "false" === u.parentNode.getAttribute("[data-auto-correct-mobile-width]"))
-                    return;
-                console.log("Block not optimized for mobile width. Block width:" + m + " Block id:" + d.getAttribute("id")),
-                console.log(u),
-                d.style.overflow = "auto",
-                d.style.wordBreak = m - 3 > e ? "break-word" : ""
-            }
-        }
-}
-
-// Initialize particles.js background
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to get saved settings or use defaults
-    function getSettings() {
-        const savedSettings = localStorage.getItem('customSettings');
-        let settings = {
-            starColor: '#FFFFFF',
-            backgroundColor: '#000000',
-            starSpeed: 50,
-            starDensity: 150,
-            background: 'stars'
-        };
-        
-        if (savedSettings) {
+        // Если есть сохраненные настройки, применяем их
+        if (savedSettingsStr) {
             try {
-                const parsed = JSON.parse(savedSettings);
-                settings = {
-                    ...settings,
-                    ...parsed
-                };
+                settings = JSON.parse(savedSettingsStr);
+                applyCustomSettings(settings);
             } catch (e) {
-                console.error("Error parsing saved settings:", e);
+                console.error('Error parsing saved settings:', e);
+                settings = getDefaultSettings();
             }
+        } else {
+            // Если настроек нет, используем значения по умолчанию
+            settings = getDefaultSettings();
         }
         
         return settings;
     }
-    
-    // Convert hex color to rgba format
+
+    // Получение настроек по умолчанию
+    function getDefaultSettings() {
+        return {
+            headerColor: '#7c5cff',
+            backgroundColor: '#000000',
+            accentColor: '#7c5cff',
+            textColor: '#FFFFFF',
+            titleSize: '100',
+            subtitleSize: '100',
+            bodyTextSize: '100',
+            waveSpeed: '5',
+            starSpeed: '5',
+            background: 'stars',
+            theme: 'dark'
+        };
+    }
+
+    // Применение сохраненных настроек к странице
+    function applyCustomSettings(settings) {
+        if (!settings) return;
+        
+        // Применяем цвета
+        if (settings.headerColor) {
+            document.documentElement.style.setProperty('--header-color', settings.headerColor);
+            document.documentElement.style.setProperty('--wave-color-1', hexToRgba(settings.headerColor, 0.7));
+            document.documentElement.style.setProperty('--wave-color-2', hexToRgba(settings.headerColor, 0.5));
+            document.documentElement.style.setProperty('--wave-color-3', hexToRgba(settings.headerColor, 0.3));
+            document.documentElement.style.setProperty('--wave-color-4', settings.headerColor);
+        }
+        
+        if (settings.backgroundColor) {
+            document.body.style.backgroundColor = settings.backgroundColor;
+        }
+        
+        if (settings.accentColor) {
+            document.documentElement.style.setProperty('--accent-color', settings.accentColor);
+            document.documentElement.style.setProperty('--accent-hover', lightenColor(settings.accentColor, 20));
+            updateAccentColorRGB(settings.accentColor);
+        }
+        
+        if (settings.textColor) {
+            document.documentElement.style.setProperty('--text-color', settings.textColor);
+        }
+        
+        // Применяем размеры текста
+        if (settings.titleSize) {
+            const titleFontSize = 24 + ((parseInt(settings.titleSize) / 100) * 20);
+            document.documentElement.style.setProperty('--title-font-size', titleFontSize + 'px');
+        }
+        
+        if (settings.subtitleSize) {
+            const subtitleFontSize = 16 + ((parseInt(settings.subtitleSize) / 100) * 8);
+            document.documentElement.style.setProperty('--subtitle-font-size', subtitleFontSize + 'px');
+        }
+        
+        if (settings.bodyTextSize) {
+            const bodyFontSize = 14 + ((parseInt(settings.bodyTextSize) / 100) * 6);
+            document.documentElement.style.setProperty('--body-font-size', bodyFontSize + 'px');
+        }
+        
+        // Применяем анимации
+        if (settings.waveSpeed) {
+            const waveSpeed = parseInt(settings.waveSpeed);
+            const normalizedWaveSpeed = waveSpeed / 100;
+            
+            if (waveSpeed === 0) {
+                // Останавливаем анимацию волн
+                document.documentElement.style.setProperty('--wave-animation-duration', '0s');
+                
+                const parallaxUses = document.querySelectorAll('.parallax > use');
+                parallaxUses.forEach((use) => {
+                    use.style.animationPlayState = 'paused';
+                    use.style.animationDuration = '0s';
+                });
+            } else {
+                const baseSpeed = 25; // seconds
+                const newSpeed = baseSpeed / (normalizedWaveSpeed * 2 + 0.5);
+                document.documentElement.style.setProperty('--wave-animation-duration', newSpeed + 's');
+                
+                const parallaxUses = document.querySelectorAll('.parallax > use');
+                parallaxUses.forEach((use, index) => {
+                    const baseDurations = [7, 7, 10, 10, 13, 13, 20, 20];
+                    const duration = baseDurations[index % baseDurations.length] || 10;
+                    use.style.animationPlayState = 'running';
+                    use.style.animationDuration = (duration / (normalizedWaveSpeed * 2 + 0.5)) + 's';
+                });
+            }
+        }
+        
+        // Применяем тему
+        if (settings.theme) {
+            document.documentElement.setAttribute('data-theme', settings.theme);
+        }
+        
+        // Применяем фон
+        if (settings.background) {
+            document.documentElement.setAttribute('data-background', settings.background);
+            
+            // Инициализируем фон в зависимости от типа
+            initializeBackground(settings.background, settings);
+        }
+    }
+
+    // Инициализация фона
+    function initializeBackground(bgType, settings) {
+        if (!settings) {
+            settings = loadSavedSettings();
+        }
+        
+        if (!bgType) {
+            bgType = settings.background || 'stars';
+        }
+        
+        // Устанавливаем тип фона
+        document.documentElement.setAttribute('data-background', bgType);
+        
+        if (bgType === 'gradient') {
+            // Применяем градиентный фон
+            applyGradientBackground(settings.headerColor, settings.backgroundColor);
+        } else {
+            // Сбрасываем фон
+            resetBackground(settings.backgroundColor);
+            
+            // Инициализируем частицы
+            if (bgType === 'stars') {
+                initializeParticlesBackground('stars', settings);
+            } else if (bgType === 'particles') {
+                initializeParticlesBackground('particles', settings);
+            }
+        }
+    }
+
+    // Функция для применения градиентного фона
+    function applyGradientBackground(color1, color2) {
+        if (!color1) color1 = '#7c5cff';
+        if (!color2) color2 = '#000000';
+        
+        document.body.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+        document.body.style.backgroundAttachment = 'fixed';
+        
+        // Скрываем частицы
+        const particlesElements = document.querySelectorAll('#particles-background, #particles-foreground');
+        particlesElements.forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+    }
+
+    // Функция для сброса фона
+    function resetBackground(backgroundColor) {
+        if (!backgroundColor) backgroundColor = '#000000';
+        
+        document.body.style.background = backgroundColor;
+        document.body.style.backgroundAttachment = 'initial';
+        
+        // Показываем частицы
+        const particlesElements = document.querySelectorAll('#particles-background, #particles-foreground');
+        particlesElements.forEach(el => {
+            if (el) el.style.display = 'block';
+        });
+    }
+
+    // Функция для инициализации фона с частицами
+    function initializeParticlesBackground(type, settings) {
+        if (typeof particlesJS === 'undefined') return;
+        
+        const starSpeed = parseFloat(settings.starSpeed || 5) / 100 * 6;
+        
+        if (type === 'stars') {
+            particlesJS("particles-background", {
+                "particles": {
+                    "number": {
+                        "value": 100,
+                        "density": { "enable": true, "value_area": 800 }
+                    },
+                    "color": {
+                        "value": settings.textColor || '#FFFFFF'
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": { "width": 0, "color": "#000000" }
+                    },
+                    "opacity": {
+                        "value": 0.8,
+                        "random": true,
+                        "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false }
+                    },
+                    "size": {
+                        "value": 2,
+                        "random": true,
+                        "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false }
+                    },
+                    "line_linked": {
+                        "enable": false
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": starSpeed,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "bubble" },
+                        "onclick": { "enable": true, "mode": "repulse" },
+                        "resize": true
+                    },
+                    "modes": {
+                        "bubble": { "distance": 150, "size": 4, "duration": 2, "opacity": 1, "speed": 3 },
+                        "repulse": { "distance": 200, "duration": 0.4 }
+                    }
+                },
+                "retina_detect": true
+            });
+        } else if (type === 'particles') {
+            particlesJS("particles-background", {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": { "enable": true, "value_area": 800 }
+                    },
+                    "color": {
+                        "value": settings.accentColor || '#7c5cff'
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": { "width": 0, "color": "#000000" }
+                    },
+                    "opacity": {
+                        "value": 0.6,
+                        "random": false,
+                        "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": settings.accentColor || '#7c5cff',
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": starSpeed,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": true, "mode": "push" },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                        "push": { "particles_nb": 4 }
+                    }
+                },
+                "retina_detect": true
+            });
+        }
+    }
+
+    // Утилитарные функции
     function hexToRgba(hex, alpha = 1) {
-        if (!hex) return `rgba(255, 255, 255, ${alpha})`;
+        if (!hex) return "rgba(124, 92, 255, " + alpha + ")";
         
         try {
             const r = parseInt(hex.slice(1, 3), 16);
@@ -468,219 +706,46 @@ document.addEventListener('DOMContentLoaded', function() {
             const b = parseInt(hex.slice(5, 7), 16);
             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
         } catch (e) {
-            console.error("Error converting color:", hex, e);
-            return `rgba(255, 255, 255, ${alpha})`;
+            console.error("Error parsing color:", hex, e);
+            return "rgba(124, 92, 255, " + alpha + ")";
         }
     }
-    
-    // Function to initialize particles with custom settings
-    function initParticles() {
-        const settings = getSettings();
-        const starColor = settings.starColor || '#FFFFFF';
-        const starSpeed = parseInt(settings.starSpeed || 50) / 100;
-        const starDensity = parseInt(settings.starDensity || 150);
-        const backgroundType = settings.background || 'stars';
+
+    function lightenColor(color, percent) {
+        if (!color) return "#9b82ff";
         
-        // Hide particles if gradient background is selected
-        if (backgroundType === 'gradient') {
-            const particlesBg = document.getElementById('particles-background');
-            const particlesFg = document.getElementById('particles-foreground');
-            if (particlesBg) particlesBg.style.display = 'none';
-            if (particlesFg) particlesFg.style.display = 'none';
+        try {
+            const num = parseInt(color.slice(1), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = (num >> 16) + amt;
+            const G = (num >> 8 & 0x00FF) + amt;
+            const B = (num & 0x0000FF) + amt;
             
-            // Apply gradient background
-            document.documentElement.setAttribute('data-background', 'gradient');
-            document.body.style.background = 'linear-gradient(45deg, #12c2e9, #c471ed, #f64f59)';
-            document.body.style.backgroundSize = '400% 400%';
-            document.body.style.animation = 'gradient 15s ease infinite';
-            return;
-        }
-        
-        // Set background type attribute
-        document.documentElement.setAttribute('data-background', backgroundType);
-        
-        // Default base speeds
-        const baseMaxSpeed = 0.7;
-        const baseMinSpeed = 0.1;
-        
-        // Calculate speeds
-        let maxSpeed = baseMaxSpeed * (starSpeed * 3);
-        let minSpeed = baseMinSpeed * (starSpeed * 2);
-        
-        if (starSpeed === 0) {
-            maxSpeed = 0;
-            minSpeed = 0;
-        }
-        
-        // Convert colors
-        const dotColor = hexToRgba(starColor, 0.8);
-        const lineColor = hexToRgba(starColor, 0.3);
-        
-        // Configure particles based on background type
-        let bgConfig, fgConfig;
-        
-        if (backgroundType === 'particles') {
-            // Interactive particles configuration
-            bgConfig = {
-                particles: {
-                    number: {
-                        value: Math.round(starDensity * 0.7),
-                        density: { enable: true, value_area: 800 }
-                    },
-                    color: { value: dotColor },
-                    shape: {
-                        type: "circle",
-                        stroke: { width: 0, color: "#000000" }
-                    },
-                    opacity: {
-                        value: 0.8,
-                        random: true,
-                        anim: { enable: true, speed: 1, opacity_min: 0, sync: false }
-                    },
-                    size: {
-                        value: 3,
-                        random: true,
-                        anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: lineColor,
-                        opacity: 0.3,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: maxSpeed,
-                        direction: "none",
-                        random: true,
-                        straight: false,
-                        out_mode: "out",
-                        bounce: false,
-                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
-                    },
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "grab" },
-                        onclick: { enable: true, mode: "push" },
-                        resize: true
-                    },
-                    modes: {
-                        grab: { distance: 140, line_linked: { opacity: 1 } },
-                        bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-                        repulse: { distance: 200, duration: 0.4 },
-                        push: { particles_nb: 4 },
-                        remove: { particles_nb: 2 }
-                    }
-                },
-                retina_detect: true
-            };
-            
-            // Foreground config is a slightly modified version of background config
-            fgConfig = JSON.parse(JSON.stringify(bgConfig));
-            fgConfig.particles.number.value = Math.round(starDensity * 0.3);
-            fgConfig.particles.move.speed = maxSpeed * 1.5; // Faster
-            fgConfig.particles.size.value = 2; // Smaller
-            fgConfig.particles.opacity.value = 0.4; // More transparent
-        } else {
-            // Standard stars configuration (default)
-            bgConfig = {
-                particles: {
-                    number: {
-                        value: Math.round(starDensity * 0.7),
-                        density: { enable: true, value_area: 800 }
-                    },
-                    color: { value: dotColor },
-                    shape: {
-                        type: "circle",
-                        stroke: { width: 0, color: "#000000" }
-                    },
-                    opacity: {
-                        value: 0.8,
-                        random: true,
-                        anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
-                    },
-                    size: {
-                        value: 2,
-                        random: true,
-                        anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
-                    },
-                    line_linked: { enable: false },
-                    move: {
-                        enable: true,
-                        speed: maxSpeed,
-                        direction: "none",
-                        random: true,
-                        straight: false,
-                        out_mode: "out",
-                        bounce: false,
-                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
-                    }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "bubble" },
-                        onclick: { enable: true, mode: "repulse" },
-                        resize: true
-                    },
-                    modes: {
-                        grab: { distance: 400, line_linked: { opacity: 1 } },
-                        bubble: { distance: 250, size: 3, duration: 2, opacity: 0.8, speed: 3 },
-                        repulse: { distance: 150, duration: 0.4 },
-                        push: { particles_nb: 4 },
-                        remove: { particles_nb: 2 }
-                    }
-                },
-                retina_detect: true
-            };
-            
-            // Foreground config
-            fgConfig = JSON.parse(JSON.stringify(bgConfig));
-            fgConfig.particles.number.value = Math.round(starDensity * 0.3);
-            fgConfig.particles.size.value = 1;
-            fgConfig.particles.move.speed = maxSpeed * 1.5;
-            fgConfig.particles.opacity.value = 0.4;
-        }
-        
-        // Initialize particles.js
-        if (window.particlesJS) {
-            // Clear any existing particles first
-            if (window.pJSDom && window.pJSDom.length > 0) {
-                for (let i = 0; i < window.pJSDom.length; i++) {
-                    if (window.pJSDom[i].pJS.fn.vendors.destroypJS) {
-                        window.pJSDom[i].pJS.fn.vendors.destroypJS();
-                    }
-                }
-                window.pJSDom = [];
-            }
-            
-            // Initialize background particles
-            particlesJS("particles-background", bgConfig);
-            
-            // Initialize foreground particles
-            particlesJS("particles-foreground", fgConfig);
+            return "#" + (
+                0x1000000 + 
+                (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+                (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+                (B < 255 ? (B < 1 ? 0 : B) : 255)
+            ).toString(16).slice(1);
+        } catch (e) {
+            console.error("Error lightening color:", color, e);
+            return "#9b82ff";
         }
     }
-    
-    // Initialize particles on page load
-    initParticles();
-    
-    // Re-initialize when settings change (triggered by theme-switcher.js)
-    window.addEventListener('customSettingsChanged', function() {
-        initParticles();
-    });
-    
-    // Re-initialize when window resizes
-    window.addEventListener('resize', function() {
-        // Debounce the resize event
-        if (window.resizeTimeout) {
-            clearTimeout(window.resizeTimeout);
-        }
-        window.resizeTimeout = setTimeout(function() {
-            initParticles();
-        }, 250);
-    });
-});
+
+    // Функция обновления RGB значения для CSS
+    function updateAccentColorRGB(hexColor) {
+        if (!hexColor) return;
+        
+        // Конвертация HEX в RGB
+        const r = parseInt(hexColor.slice(1, 3), 16);
+        const g = parseInt(hexColor.slice(3, 5), 16);
+        const b = parseInt(hexColor.slice(5, 7), 16);
+        
+        // Установка data-атрибута для CSS селектора
+        document.documentElement.setAttribute('data-accent-color', hexColor);
+        
+        // Прямое обновление переменной
+        document.documentElement.style.setProperty('--accent-color-rgb', `${r}, ${g}, ${b}`);
+    }
+}(window, document);

@@ -1,100 +1,63 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lefaton Cheats - Customize</title>
-    <link rel="stylesheet" href="../static/css/mainpage.css">
-    <link rel="stylesheet" href="../static/css/mainpage_header.css">
-    <link rel="stylesheet" href="../static/css/mainpage_background.css">
-    <link rel="stylesheet" href="../static/css/customize.css">
+    <title>Lefaton Cheats - Расширенная настройка</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customize.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Pickr color picker library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css">
 </head>
 <body>
     <header>
         <!-- Content Container -->
         <div class="header_content">
-            <div class="left_side_header">
-                <a href="/main" class="home_btn_logo_header"><img src="../static/images/logo.svg" alt=""></a>
-                <a href="/catalog" class="left_side_header_btn_catalog">
-                    <section>
-                        Арсенал читов
-                    </section>
-                </a>
-                <a href="/community" class="left_side_header_btn_community">
-                    <section>
-                        Страница сообщества
-                    </section>
-                </a>
-                <a href="/support" class="left_side_header_btn_support">
-                    <section>
-                        Техподдержка
-                    </section>
-                </a>
-                <a href="/faq" class="left_side_header_btn_faq">
-                    <section>
-                        FAQ
-                    </section>
-                </a>
-                <a href="/updates" class="left_side_header_btn_updates">
-                    <section>
-                        Обновления
-                    </section>
-                </a>
-                <a href="/upcoming" class="left_side_header_btn_upcoming">
-                    <section>
-                        Скоро в продаже
-                    </section>
-                </a>
-            </div>
-            <div class="right_side_header">
-                <a href="/account" class="right_side_header_bth_account">
-                    <section>
-                        Аккаунт
-                    </section>
-                </a>
-                <div class="settings-dropdown">
-                    <div class="settings-btn">
-                        <i class="fas fa-cog"></i> Настройки
-                    </div>
-                    <div class="dropdown-content">
-                        <div class="theme-switch-container">
-                            <span>Тёмная тема</span>
-                            <label class="theme-switch" for="theme-checkbox">
-                                <input type="checkbox" id="theme-checkbox" />
-                                <div class="slider round"></div>
-                            </label>
-                        </div>
-                        
-                        <div class="dropdown-item language-select">
-                            <i class="fas fa-globe"></i> Язык
-                            <div class="language-options">
-                                <div class="language-option" data-lang="ru">
-                                    <img src="../static/images/flags/ru.png" alt="Russian" class="flag-icon">
-                                    Русский
-                                </div>
-                                <div class="language-option" data-lang="en">
-                                    <img src="../static/images/flags/en.png" alt="English" class="flag-icon">
-                                    English
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="dropdown-item currency-select">
-                            <i class="fas fa-coins"></i> Валюта
-                            <div class="currency-options">
-                                <div class="currency-option" data-currency="rub">₽ Рубль</div>
-                                <div class="currency-option" data-currency="usd">$ Доллар</div>
-                                <div class="currency-option" data-currency="eur">€ Евро</div>
-                            </div>
-                        </div>
-                        
-                        <div class="divider"></div>
-                        
-                        <a href="/customize" class="dropdown-item">
-                            <i class="fas fa-paint-brush"></i> Кастомизация
-                        </a>
-                    </div>
+            <div class="unified_header">
+                <a href="/main" class="home_btn_logo_header"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Lefaton Logo"></a>
+                <div class="nav_links">
+                    <a href="/catalog" class="header_btn">
+                        <section>
+                            <i class="fas fa-gamepad"></i> Арсенал читов
+                        </section>
+                    </a>
+                    <a href="/community" class="header_btn">
+                        <section>
+                            <i class="fas fa-users"></i> Сообщество
+                        </section>
+                    </a>
+                    <a href="/support" class="header_btn">
+                        <section>
+                            <i class="fas fa-headset"></i> Техподдержка
+                        </section>
+                    </a>
+                    <a href="/faq" class="header_btn">
+                        <section>
+                            <i class="fas fa-question-circle"></i> FAQ
+                        </section>
+                    </a>
+                    <a href="/updates" class="header_btn">
+                        <section>
+                            <i class="fas fa-sync-alt"></i> Обновления
+                        </section>
+                    </a>
+                    <a href="/upcoming" class="header_btn">
+                        <section>
+                            <i class="fas fa-clock"></i> Скоро в продаже
+                        </section>
+                    </a>
+                    <a href="/account" class="header_btn account_btn">
+                        <section>
+                            <i class="fas fa-user"></i> Аккаунт
+                        </section>
+                    </a>
+                </div>
+                <div class="menu_toggle">
+                    <i class="fas fa-bars"></i>
                 </div>
             </div>
         </div>
@@ -130,64 +93,87 @@
 
             <!-- Customization Container -->
             <div class="customize-container">
-                <h1 class="customize-title">Настройка интерфейса</h1>
+                <div class="customize-header">
+                    <h1 class="customize-title">Расширенная настройка интерфейса</h1>
+                    <a href="/account" class="back-to-account">
+                        <i class="fas fa-arrow-left"></i> Вернуться в аккаунт
+                    </a>
+                </div>
                 
                 <div class="customize-section">
                     <h2>Готовые цветовые схемы</h2>
                     <div class="color-palettes">
-                        <div class="color-palette" data-colors="#FFA600,#000000,#FFFFFF,#FFFFFF">
+                        <div class="color-palette" data-palette="standard" data-colors="#7c5cff,#000000,#7c5cff,#FFFFFF">
                             <div class="palette-colors">
-                                <div class="palette-color" style="background-color: #FFA600;"></div>
+                                <div class="palette-color" style="background-color: #7c5cff;"></div>
                                 <div class="palette-color" style="background-color: #000000;"></div>
-                                <div class="palette-color" style="background-color: #FFFFFF;"></div>
+                                <div class="palette-color" style="background-color: #7c5cff;"></div>
                                 <div class="palette-color" style="background-color: #FFFFFF;"></div>
                             </div>
                             <span>Стандартная</span>
                         </div>
-                        <div class="color-palette" data-colors="#3498db,#2c3e50,#ecf0f1,#ecf0f1">
+                        <div class="color-palette" data-palette="cold" data-colors="#3498db,#2c3e50,#3498db,#ecf0f1">
                             <div class="palette-colors">
                                 <div class="palette-color" style="background-color: #3498db;"></div>
                                 <div class="palette-color" style="background-color: #2c3e50;"></div>
-                                <div class="palette-color" style="background-color: #ecf0f1;"></div>
+                                <div class="palette-color" style="background-color: #3498db;"></div>
                                 <div class="palette-color" style="background-color: #ecf0f1;"></div>
                             </div>
                             <span>Холодная</span>
                         </div>
-                        <div class="color-palette" data-colors="#e74c3c,#2c3e50,#f1c40f,#ecf0f1">
+                        <div class="color-palette" data-palette="contrast" data-colors="#e74c3c,#2c3e50,#e74c3c,#ecf0f1">
                             <div class="palette-colors">
                                 <div class="palette-color" style="background-color: #e74c3c;"></div>
                                 <div class="palette-color" style="background-color: #2c3e50;"></div>
-                                <div class="palette-color" style="background-color: #f1c40f;"></div>
+                                <div class="palette-color" style="background-color: #e74c3c;"></div>
                                 <div class="palette-color" style="background-color: #ecf0f1;"></div>
                             </div>
                             <span>Контрастная</span>
                         </div>
-                        <div class="color-palette" data-colors="#9b59b6,#34495e,#1abc9c,#ecf0f1">
+                        <div class="color-palette" data-palette="creative" data-colors="#9b59b6,#34495e,#9b59b6,#ecf0f1">
                             <div class="palette-colors">
                                 <div class="palette-color" style="background-color: #9b59b6;"></div>
                                 <div class="palette-color" style="background-color: #34495e;"></div>
-                                <div class="palette-color" style="background-color: #1abc9c;"></div>
+                                <div class="palette-color" style="background-color: #9b59b6;"></div>
                                 <div class="palette-color" style="background-color: #ecf0f1;"></div>
                             </div>
                             <span>Креативная</span>
                         </div>
-                        <div class="color-palette" data-colors="#1e1e2f,#000000,#8e44ad,#ecf0f1">
+                        <div class="color-palette" data-palette="dark" data-colors="#8e44ad,#000000,#8e44ad,#ecf0f1">
                             <div class="palette-colors">
-                                <div class="palette-color" style="background-color: #1e1e2f;"></div>
+                                <div class="palette-color" style="background-color: #8e44ad;"></div>
                                 <div class="palette-color" style="background-color: #000000;"></div>
                                 <div class="palette-color" style="background-color: #8e44ad;"></div>
                                 <div class="palette-color" style="background-color: #ecf0f1;"></div>
                             </div>
                             <span>Тёмная</span>
                         </div>
-                        <div class="color-palette custom-palette" data-colors="custom">
+                        <div class="color-palette" data-palette="rust" data-colors="#cd412b,#1a1a1a,#cd412b,#f5f5f5">
                             <div class="palette-colors">
-                                <div id="custom-header-color" class="palette-color" style="background-color: #FFA600;"></div>
-                                <div id="custom-bg-color" class="palette-color" style="background-color: #000000;"></div>
-                                <div id="custom-star-color" class="palette-color" style="background-color: #FFFFFF;"></div>
-                                <div id="custom-text-color" class="palette-color" style="background-color: #FFFFFF;"></div>
+                                <div class="palette-color" style="background-color: #cd412b;"></div>
+                                <div class="palette-color" style="background-color: #1a1a1a;"></div>
+                                <div class="palette-color" style="background-color: #cd412b;"></div>
+                                <div class="palette-color" style="background-color: #f5f5f5;"></div>
                             </div>
-                            <span>Кастомная</span>
+                            <span>Rust</span>
+                        </div>
+                        <div class="color-palette" data-palette="cs" data-colors="#00a9e0,#131313,#00a9e0,#f5f5f5">
+                            <div class="palette-colors">
+                                <div class="palette-color" style="background-color: #00a9e0;"></div>
+                                <div class="palette-color" style="background-color: #131313;"></div>
+                                <div class="palette-color" style="background-color: #00a9e0;"></div>
+                                <div class="palette-color" style="background-color: #f5f5f5;"></div>
+                            </div>
+                            <span>CS2</span>
+                        </div>
+                        <div class="color-palette" data-palette="warthunder" data-colors="#c9a45b,#2e2e2e,#c9a45b,#f5f5f5">
+                            <div class="palette-colors">
+                                <div class="palette-color" style="background-color: #c9a45b;"></div>
+                                <div class="palette-color" style="background-color: #2e2e2e;"></div>
+                                <div class="palette-color" style="background-color: #c9a45b;"></div>
+                                <div class="palette-color" style="background-color: #f5f5f5;"></div>
+                            </div>
+                            <span>War Thunder</span>
                         </div>
                     </div>
                 </div>
@@ -197,35 +183,23 @@
                     
                     <div class="color-options">
                         <div class="color-option">
-                            <label for="header-color">Цвет шапки:</label>
-                            <div class="color-picker-container">
-                                <div id="header-color-indicator" class="color-indicator"></div>
-                                <input type="color" id="header-color" value="#FFA600">
-                            </div>
+                            <label for="headerColor">Цвет шапки:</label>
+                            <div id="header-color-picker" class="color-picker"></div>
                         </div>
                         
                         <div class="color-option">
-                            <label for="background-color">Цвет фона:</label>
-                            <div class="color-picker-container">
-                                <div id="background-color-indicator" class="color-indicator"></div>
-                                <input type="color" id="background-color" value="#000000">
-                            </div>
+                            <label for="backgroundColor">Цвет фона:</label>
+                            <div id="bg-color-picker" class="color-picker"></div>
                         </div>
                         
                         <div class="color-option">
-                            <label for="star-color">Цвет звезд:</label>
-                            <div class="color-picker-container">
-                                <div id="star-color-indicator" class="color-indicator"></div>
-                                <input type="color" id="star-color" value="#FFFFFF">
-                            </div>
+                            <label for="accentColor">Цвет акцента:</label>
+                            <div id="accent-color-picker" class="color-picker"></div>
                         </div>
                         
                         <div class="color-option">
-                            <label for="text-color">Цвет текста:</label>
-                            <div class="color-picker-container">
-                                <div id="text-color-indicator" class="color-indicator"></div>
-                                <input type="color" id="text-color" value="#FFFFFF">
-                            </div>
+                            <label for="textColor">Цвет текста:</label>
+                            <div id="text-color-picker" class="color-picker"></div>
                         </div>
                     </div>
                 </div>
@@ -235,93 +209,175 @@
                     
                     <div class="font-size-options">
                         <div class="font-size-option">
-                            <label for="title-size">Размер заголовков:</label>
-                            <div class="slider-container">
-                                <input type="range" id="title-size" min="0" max="100" step="1" value="50">
-                                <span id="title-size-value" class="editable-value">50</span>
+                            <label for="titleSize">Размер заголовков:</label>
+                            <div class="slider-with-value">
+                                <input type="range" id="titleSize" min="0" max="100" step="1" value="50">
+                                <div class="value-input">
+                                    <input type="number" id="titleSizeValue" min="0" max="100" value="50">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="font-size-option">
-                            <label for="subtitle-size">Размер подзаголовков:</label>
-                            <div class="slider-container">
-                                <input type="range" id="subtitle-size" min="0" max="100" step="1" value="50">
-                                <span id="subtitle-size-value" class="editable-value">50</span>
+                            <label for="subtitleSize">Размер подзаголовков:</label>
+                            <div class="slider-with-value">
+                                <input type="range" id="subtitleSize" min="0" max="100" step="1" value="50">
+                                <div class="value-input">
+                                    <input type="number" id="subtitleSizeValue" min="0" max="100" value="50">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="font-size-option">
-                            <label for="body-text-size">Размер основного текста:</label>
-                            <div class="slider-container">
-                                <input type="range" id="body-text-size" min="0" max="100" step="1" value="50">
-                                <span id="body-text-value" class="editable-value">50</span>
+                            <label for="bodyTextSize">Размер обычного текста:</label>
+                            <div class="slider-with-value">
+                                <input type="range" id="bodyTextSize" min="0" max="100" step="1" value="50">
+                                <div class="value-input">
+                                    <input type="number" id="bodyTextSizeValue" min="0" max="100" value="50">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="customize-section">
-                    <h2>Анимация</h2>
+                    <h2>Анимации</h2>
                     
                     <div class="animation-options">
                         <div class="animation-option">
-                            <label for="star-speed">Скорость движения звезд:</label>
-                            <div class="slider-container">
-                                <input type="range" id="star-speed" min="0" max="100" step="1" value="5">
-                                <span id="star-speed-value" class="editable-value">50</span>
+                            <label for="waveSpeed">Скорость волн:</label>
+                            <div class="slider-with-value">
+                                <input type="range" id="waveSpeed" min="0" max="100" step="1" value="5">
+                                <div class="value-input">
+                                    <input type="number" id="waveSpeedValue" min="0" max="100" value="5">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="animation-option">
-                            <label for="wave-speed">Скорость волн:</label>
-                            <div class="slider-container">
-                                <input type="range" id="wave-speed" min="0" max="100" step="1" value="2">
-                                <span id="wave-speed-value" class="editable-value">50</span>
-                            </div>
-                        </div>
-                        
-                        <div class="animation-option">
-                            <label for="star-density">Плотность звезд:</label>
-                            <div class="slider-container">
-                                <input type="range" id="star-density" min="10" max="200" step="5" value="150">
-                                <span id="star-density-value" class="editable-value">50</span>
+                            <label for="starSpeed">Скорость частиц фона:</label>
+                            <div class="slider-with-value">
+                                <input type="range" id="starSpeed" min="0" max="100" step="1" value="5">
+                                <div class="value-input">
+                                    <input type="number" id="starSpeedValue" min="0" max="100" value="5">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="customize-section">
-                    <h2>Фоновое изображение</h2>
+                    <h2>Фоновый эффект</h2>
                     
                     <div class="background-options">
-                        <div class="background-option" data-background="stars">
-                            <img src="../static/images/backgrounds/stars-thumbnail.jpg" alt="Звезды">
+                        <div class="background-option active" data-background="stars">
+                            <i class="fas fa-star"></i>
                             <span>Звезды</span>
                         </div>
                         <div class="background-option" data-background="particles">
-                            <img src="../static/images/backgrounds/particles-thumbnail.jpg" alt="Частицы">
+                            <i class="fas fa-atom"></i>
                             <span>Частицы</span>
                         </div>
                         <div class="background-option" data-background="gradient">
-                            <img src="../static/images/backgrounds/gradient-thumbnail.jpg" alt="Градиент">
+                            <i class="fas fa-palette"></i>
                             <span>Градиент</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="customize-actions">
-                    <button id="save-customize" class="customize-button">Сохранить настройки</button>
-                    <button id="reset-customize" class="customize-button">Сбросить настройки</button>
+                <div class="customize-section">
+                    <h2>Предпросмотр</h2>
+                    
+                    <div class="preview-container">
+                        <div class="preview-header">
+                            <span class="preview-logo">Lefaton Cheats</span>
+                            <div class="preview-nav">
+                                <span>Главная</span>
+                                <span>Каталог</span>
+                                <span>Сообщество</span>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-content">
+                            <h3 class="preview-title">Заголовок страницы</h3>
+                            <p class="preview-text">Пример текста для предпросмотра настроек. Здесь вы можете увидеть, как будут выглядеть заголовки, подзаголовки и обычный текст на странице.</p>
+                            
+                            <div class="preview-card">
+                                <h4 class="preview-subtitle">Подзаголовок карточки</h4>
+                                <p class="preview-text">Содержимое карточки с примером текста.</p>
+                                <button class="preview-button">Кнопка</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="save-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Изменения вступят в силу после сохранения и перезагрузки страницы.</span>
+                </div>
+                
+                <div class="buttons-container">
+                    <button type="button" id="save-settings" class="save-btn">Сохранить настройки</button>
+                    <button type="button" id="reset-settings" class="reset-btn">Сбросить настройки</button>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- JavaScript -->
+    <!-- Pickr library -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    
     <!-- Particles.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="../static/js/mainpage_background.js"></script>
-    <script src="../static/js/customize.js"></script>
-    <script src="../static/js/theme-switcher.js"></script>
-    <script src="../static/js/settings-manager.js"></script>
+    
+    <!-- Core modules -->
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/background.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    
+    <!-- Page-specific module -->
+    <script src="{{ url_for('static', filename='js/customize.js') }}"></script>
+    
+    <!-- Main initialization -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu_toggle');
+            const navLinks = document.querySelector('.nav_links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                    
+                    // Toggle icon between bars and X
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('fa-bars')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                const navButtons = navLinks.querySelectorAll('.header_btn');
+                navButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (window.innerWidth <= 768) {
+                            navLinks.classList.remove('open');
+                            const icon = menuToggle.querySelector('i');
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html> 

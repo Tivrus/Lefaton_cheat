@@ -32,18 +32,26 @@ server = Flask(__name__)
 
 @server.route("/main")
 def main():
-    return render_template("mainpage.html", title="Пирсинг Салон | Through the heart", Ava="../static/images/logo.png")
+    return render_template("mainpage.html", 
+                          title="Lefaton Cheats | Лучший магазин игровых читов")
 
 
 @server.route("/account")
 def account():
-    return render_template("account.html", title="Lefaton Cheats | Личный кабинет", Ava="../static/images/logo.png")
+    return render_template("account.html", 
+                          title="Lefaton Cheats | Личный кабинет")
 
 
 @server.route("/customize")
 def customize():
-    return render_template("customize.html", title="Пирсинг Салон | Through the heart", Ava="../static/images/logo.png")
+    return render_template("customize.html", 
+                          title="Lefaton Cheats | Настройка интерфейса")
 
+
+# Home route redirects to main
+@server.route("/")
+def home():
+    return main()
 
 
 # @server.route("/submit_form", methods=["POST"])

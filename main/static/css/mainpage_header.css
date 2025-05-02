@@ -1,357 +1,349 @@
 :root {
-  --header-color: #FFA600;
+  --header-color: rgba(255, 149, 0, 1);
   --header-text-color: #FFFFFF;
-  --button-bg-color: rgb(23, 34, 33);
-  --button-hover-color: #7c4747;
-  --wave-color-1: rgba(255, 166, 0, 0.7);
-  --wave-color-2: rgba(255, 166, 0, 0.5);
-  --wave-color-3: rgba(255, 166, 0, 0.3);
-  --wave-color-4: rgba(255, 166, 0, 1);
-  --wave-animation-duration: 25s;
+  --button-bg-color: rgba(30, 30, 45, 0.8);
+  --button-hover-color: rgba(255, 149, 0, 0.5);
+  --wave-color-1: rgba(255, 149, 0);
+  --wave-color-2: rgba(255, 149, 0);
+  --wave-color-3: rgba(255, 149, 0);
+  --wave-color-4: rgb(255, 149, 0);
+  --wave-animation-duration: 35s;
   --text-color: #FFFFFF;
+  --accent-color: rgb(255, 149, 0);
 }
 
 [data-theme="light"] {
-  --header-color: #ffa600;
-  --header-text-color: #050525;
-  --button-bg-color: #f0f0f0;
-  --button-hover-color: #c0c0c0;
-  --wave-color-1: rgba(255, 166, 0, 0.7);
-  --wave-color-2: rgba(255, 166, 0, 0.5);
-  --wave-color-3: rgba(255, 166, 0, 0.3);
-  --wave-color-4: rgba(255, 166, 0, 1);
+  --header-color: rgba(255, 149, 0, 0.7);
+  --header-text-color: #FFFFFF;
+  --button-bg-color: rgba(255, 255, 255, 0.2);
+  --button-hover-color: rgba(255, 149, 0, 0.3);
+  --wave-color-1: rgba(255, 149, 0, 0.3);
+  --wave-color-2: rgba(255, 149, 0, 0.5);
+  --wave-color-3: rgba(255, 149, 0, 1);
+  --wave-color-4: rgb(255, 149, 0, 1);
+  --accent-color: rgb(255, 149, 0);
 }
 
 header {
     position: relative;
     width: 100%;
-    z-index: 10;
+    z-index: 1;
 }
 
 /* Стили для header_content */
 .header_content {
     width: 100%;
-    height: 70px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background-color: var(--header-color);
 }
 
-/* Стили для кнопок в левой части */
-.left_side_header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+/* Unified header styles */
+.unified_header {
+    width: 100%;
     height: 100%;
-    margin-left: 5%;
-}
-
-/* Стили для всех кнопок в хедере */
-.left_side_header a section, 
-.right_side_header a section,
-.settings-btn,
-.dropdown-item,
-.theme-switch-container span,
-.language-option,
-.currency-option {
-    color: var(--text-color) !important;
-    transition: color 0.3s ease;
-}
-
-/* Специфические стили для кнопок и разделов */
-.left_side_header_btn_catalog section, 
-.left_side_header_btn_community section,
-.left_side_header_btn_support section,
-.left_side_header_btn_faq section,
-.left_side_header_btn_updates section,
-.left_side_header_btn_upcoming section {
-    height: 50px;
-    width: 200px;
-    margin-left: 10px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.06);
-    transition: all 0.2s ease;
+    justify-content:center;
+    margin: 1rem 0 0 0;
 }
 
-/* Ховер-эффекты для кнопок */
-.left_side_header_btn_catalog section:hover, 
-.left_side_header_btn_community section:hover,
-.left_side_header_btn_support section:hover,
-.left_side_header_btn_faq section:hover,
-.left_side_header_btn_updates section:hover,
-.left_side_header_btn_upcoming section:hover,
-.right_side_header_bth_account section:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-/* Правая часть хедера */
-.right_side_header {
+.nav_links {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    height: 100%;
-    margin-right: 5%;
+    gap: 1rem;
+    
 }
 
-.right_side_header_bth_account section {
-    height: 50px;
-    width: 120px;
-    margin-right: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-}
-
-/* Header Content */
 /* Logo */
-  .home_btn_logo_header img{
+.home_btn_logo_header img {
     width: 6em;
     height: auto;
-    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  }
+    transition: transform 0.3s ease;
+}
 
-  .left_side_header, .left_side_header a{
+.home_btn_logo_header:hover img {
+    transform: scale(1.05);
+}
+
+/* Button styles */
+.unified_header a {
     display: flex;
-    justify-content:space-between;
     align-items: center;
     color: var(--header-text-color);
     text-decoration: none;
     text-transform: uppercase;
-    padding: 10px;
-  }
+}
 
-  .left_side_header section{
-    padding: 10px;
+.unified_header .header_btn section {
+    height: 50px;
+    width: auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 10px;
-    background-color: var(--button-bg-color); 
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-weight: 500;
     color: white;
     border: none;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 20px;
     font-family: 'Ubuntu', Arial, sans-serif;
-    transition: background-color 0.8s ease; /* Добавляем анимацию */
-  }
+    letter-spacing: 0.5px;
+}
 
-  .left_side_header section:hover {
-    background-color: var(--button-hover-color);
-    
-  }
+.unified_header .header_btn section:hover {
+    background-color: rgba(255, 149, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 149, 0, 0.3);
+}
 
-  .right_side_header, .right_side_header a{
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    color: rgb(255,255,255);
-    text-decoration: none;
-    text-transform: uppercase;
-  }
+/* Account button special styling */
+.unified_header .account_btn section {
+    background-color: rgba(255, 149, 0, 0.15);
+}
 
-  /* Settings dropdown */
-  .settings-dropdown {
-    position: relative;
-    display: inline-block;
-  }
+/* Active state for buttons */
+.unified_header .header_btn.active section {
+    background-color: rgba(255, 149, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 149, 0, 0.4);
+}
 
-  .settings-btn {
-    display: flex;
-    align-items: center;
-    background-color: var(--button-bg-color);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-family: 'Ubuntu', Arial, sans-serif;
-    font-size: 20px;
-    text-transform: uppercase;
-  }
-
-  .settings-btn:hover {
-    background-color: var(--button-hover-color);
-  }
-
-  .settings-btn i {
-    margin-right: 5px;
-  }
-
-  .dropdown-content {
+/* Mobile menu toggle */
+.menu_toggle {
     display: none;
-    position: absolute;
-    right: 0;
-    background-color: rgba(23, 34, 33, 0.95);
-    min-width: 250px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 100;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: all 0.3s;
-  }
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--header-text-color);
+}
 
-  .settings-dropdown:hover .dropdown-content {
-    display: block;
-  }
+.menu_toggle i {
+    transition: transform 0.3s ease;
+}
 
-  .dropdown-item {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s;
-  }
+.menu_toggle:hover i {
+    transform: scale(1.1);
+}
 
-  .dropdown-item:hover {
-    background-color: rgba(255, 166, 0, 0.2);
-  }
+/* Settings dropdown */
+.settings-dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .dropdown-item i {
-    margin-right: 10px;
-    width: 20px;
-    text-align: center;
-  }
+.settings-btn {
+  display: flex;
+  align-items: center;
+  background-color: var(--button-bg-color);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Ubuntu', Arial, sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
 
-  .theme-switch-container {
-    display: flex;
+.settings-btn:hover {
+  background-color: var(--button-hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 149, 0, 0.3);
+}
+
+.settings-btn i {
+  margin-right: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: rgba(30, 30, 45, 0.9);
+  min-width: 250px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 149, 0, 0.1);
+}
+
+.settings-dropdown:hover .dropdown-content {
+  display: block;
+  transform: translateY(5px);
+}
+
+.dropdown-item {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 149, 0, 0.2);
+  padding-left: 20px;
+}
+
+.dropdown-item i {
+  margin-right: 12px;
+  width: 20px;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+.theme-switch-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Waves Container */
+.waves-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Wave color classes */
+.wave1_1, .wave1_2 {
+  fill: var(--wave-color-1);
+  opacity: 0.1;
+}
+
+.wave2_1, .wave2_2 {
+  fill: var(--wave-color-2);
+  opacity: 0.5;
+}
+
+.wave3_1, .wave3_2 {
+  fill: var(--wave-color-3);
+  opacity: 0.7;
+}
+
+.wave4_1, .wave4_2 {
+  fill: var(--wave-color-4);
+  opacity: 1;
+}
+
+.waves {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  margin-bottom: -7px;
+  min-height: 100px;
+  max-height: 150px;
+  transform: scaleY(-1);
+}
+
+/* Анимация волн - бесшовная */
+.parallax > use {
+  animation: wave-animation var(--wave-animation-duration) linear infinite;
+  transform-origin: center;
+}
+
+/* Offset animations for each wave pair */
+.parallax > use:nth-child(1), .parallax > use:nth-child(2) {
+  animation-delay: 0s;
+  animation-duration: calc(var(--wave-animation-duration)*1);
+}
+
+.parallax > use:nth-child(3), .parallax > use:nth-child(4) {
+  animation-delay: 0s;
+  animation-duration: calc(var(--wave-animation-duration)*0.7);
+}
+
+.parallax > use:nth-child(5), .parallax > use:nth-child(6) {
+  animation-delay: 0s;
+  animation-duration: calc(var(--wave-animation-duration)*0.5);
+}
+
+.parallax > use:nth-child(7), .parallax > use:nth-child(8) {
+  animation-delay: 0s;
+  animation-duration: calc(var(--wave-animation-duration)*0.3);
+}
+
+
+
+@keyframes wave-animation {
+  0% {
+    transform: translateX(0);
+  }
+  100% { 
+    transform: translateX(-1440px); /* Равно ширине SVG viewBox */
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 992px) {
+  .nav_links {
+    gap: 5px;
+  }
+  
+  .unified_header .header_btn section {
+    height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
+  }
+  
+  .home_btn_logo_header img {
+    width: 5em;
+  }
+}
+
+@media (max-width: 768px) {
+  .header_content {
+    height: auto;
+    min-height: 80px;
+  }
+  
+  .unified_header {
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
   }
-
-  .language-selector {
-    display: flex;
-    align-items: center;
-  }
-
-  .flag-icon {
-    width: 24px;
-    height: 16px;
-    margin-right: 10px;
-  }
-
-  .divider {
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 5px 0;
-  }
-
-  /* Waves */
-  .wave1{
-    fill: var(--wave-color-1);
-  }
-  .wave2{
-    fill: var(--wave-color-2);
-  }
-  .wave3{
-    fill: var(--wave-color-3);
-  }
-  .wave4{
-    fill: var(--wave-color-4);
-  }
-  .waves {
-    position: relative;
+  
+  .nav_links {
+    display: none;
     width: 100%;
-    transform: scaleY(-1);
-    max-height: 40px;
-    margin-bottom: -7px; /*Fix for safari gap*/
-    overflow: hidden;
-    /* Improve rendering quality */
-    -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0,.05));
-    filter: drop-shadow(0 1px 1px rgba(0,0,0,.05));
-    shape-rendering: geometricPrecision;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 10px;
   }
   
-  
-  /* Animation */
-  .parallax > use {
-    animation: move-forever var(--wave-animation-duration) linear infinite;
-  }
-  .parallax > use:nth-child(1), use:nth-child(2){
-    animation-delay: -2s;
-    animation-duration: calc(var(--wave-animation-duration) * 0.28);
+  .nav_links.open {
+    display: flex;
   }
   
-  .parallax > use:nth-child(3), use:nth-child(4) {
-    animation-delay: -3s;
-    animation-duration: calc(var(--wave-animation-duration) * 0.4);
+  .unified_header .header_btn {
+    width: 100%;
   }
   
-  .parallax > use:nth-child(5), use:nth-child(6){
-    animation-delay: -4s;
-    animation-duration: calc(var(--wave-animation-duration) * 0.52);
+  .unified_header .header_btn section {
+    width: 100%;
+    text-align: center;
+    justify-content: flex-start;
   }
   
-  .parallax > use:nth-child(7), use:nth-child(8){
-    animation-delay: -5s;
-    animation-duration: calc(var(--wave-animation-duration) * 0.8);
-  } 
-  
-  @keyframes move-forever {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-  
-  /* Language and Currency Dropdowns */
-  .language-select, .currency-select {
-    position: relative;
-    cursor: pointer;
-    justify-content: space-between;
-  }
-
-  .language-options, .currency-options {
-    display: none;
-    position: absolute;
-    right: 100%;
-    top: 0;
-    background-color: rgba(23, 34, 33, 0.95);
-    min-width: 150px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 101;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .language-select:hover .language-options,
-  .currency-select:hover .currency-options {
+  .menu_toggle {
     display: block;
   }
-
-  .language-option, .currency-option {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s;
+  
+  .waves {
+    height: 60px;
+    min-height: 60px;
   }
-
-  .language-option:hover, .currency-option:hover {
-    background-color: rgba(255, 166, 0, 0.2);
-  }
-
-  .language-option.active, .currency-option.active {
-    background-color: rgba(255, 166, 0, 0.4);
-  }
-
-  /* Responsive adjustments for dropdowns */
-  @media (max-width: 768px) {
-    .language-options, .currency-options {
-      right: 0;
-      top: 100%;
-    }
-  }
+}
   
   
