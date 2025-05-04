@@ -422,7 +422,7 @@
     // Получение настроек по умолчанию
     function getDefaultSettings() {
         return {
-            headerColor: '#7c5cff',
+            headerColor: '#ff9500',
             backgroundColor: '#000000',
             accentColor: '#7c5cff',
             textColor: '#FFFFFF',
@@ -443,10 +443,6 @@
         // Применяем цвета
         if (settings.headerColor) {
             document.documentElement.style.setProperty('--header-color', settings.headerColor);
-            document.documentElement.style.setProperty('--wave-color-1', hexToRgba(settings.headerColor, 0.7));
-            document.documentElement.style.setProperty('--wave-color-2', hexToRgba(settings.headerColor, 0.5));
-            document.documentElement.style.setProperty('--wave-color-3', hexToRgba(settings.headerColor, 0.3));
-            document.documentElement.style.setProperty('--wave-color-4', settings.headerColor);
         }
         
         if (settings.backgroundColor) {

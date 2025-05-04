@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
         el: '#header-color-picker',
         theme: 'nano',
         useAsButton: true,
-        default: getSettingValue('headerColor') || '#7c5cff',
+        default: getSettingValue('headerColor') || '#ff9500',
         swatches: [
-            '#7c5cff',
+            '#ff9500',
             '#b485ff', 
             '#5649c0',
             '#ff5c5c',
@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update color pickers
         if (typeof headerColorPickr !== 'undefined') {
-            headerColorPickr.setColor(savedSettings.headerColor || '#7c5cff');
+            headerColorPickr.setColor(savedSettings.headerColor || '#ff9500');
         }
         
         if (typeof bgColorPickr !== 'undefined') {
@@ -521,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (typeof accentColorPickr !== 'undefined') {
-            accentColorPickr.setColor(savedSettings.accentColor || '#7c5cff');
+            accentColorPickr.setColor(savedSettings.accentColor || '#ff9500');
         }
         
         if (typeof textColorPickr !== 'undefined') {
@@ -571,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to get custom settings from inputs
     function getCustomSettingsFromInputs() {
         // Get values from color pickers
-        const headerColor = headerColorPickr ? headerColorPickr.getColor().toHEXA().toString() : '#7c5cff';
+        const headerColor = headerColorPickr ? headerColorPickr.getColor().toHEXA().toString() : '#ff9500';
         const backgroundColor = bgColorPickr ? bgColorPickr.getColor().toHEXA().toString() : '#000000';
         const accentColor = accentColorPickr ? accentColorPickr.getColor().toHEXA().toString() : '#7c5cff';
         const textColor = textColorPickr ? textColorPickr.getColor().toHEXA().toString() : '#FFFFFF';

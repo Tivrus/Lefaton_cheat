@@ -21,6 +21,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
+  font-weight: 700; 
+  font-size: 48px;
   display: inline-block;
 }
 

@@ -1,26 +1,18 @@
 :root {
-  --header-color: rgba(255, 149, 0, 1);
+  --header-color: #ff9500;
   --header-text-color: #FFFFFF;
   --button-bg-color: rgba(30, 30, 45, 0.8);
-  --button-hover-color: rgba(255, 149, 0, 0.5);
-  --wave-color-1: rgba(255, 149, 0);
-  --wave-color-2: rgba(255, 149, 0);
-  --wave-color-3: rgba(255, 149, 0);
-  --wave-color-4: rgb(255, 149, 0);
+  --button-hover-color: rgb(112, 65, 0);
   --wave-animation-duration: 35s;
   --text-color: #FFFFFF;
   --accent-color: rgb(255, 149, 0);
 }
 
 [data-theme="light"] {
-  --header-color: rgba(255, 149, 0, 0.7);
+  --header-color: rgba(255, 149, 0);
   --header-text-color: #FFFFFF;
   --button-bg-color: rgba(255, 255, 255, 0.2);
   --button-hover-color: rgba(255, 149, 0, 0.3);
-  --wave-color-1: rgba(255, 149, 0, 0.3);
-  --wave-color-2: rgba(255, 149, 0, 0.5);
-  --wave-color-3: rgba(255, 149, 0, 1);
-  --wave-color-4: rgb(255, 149, 0, 1);
   --accent-color: rgb(255, 149, 0);
 }
 
@@ -61,11 +53,18 @@ header {
 .home_btn_logo_header img {
     width: 6em;
     height: auto;
+    margin-right: 5px;
     transition: transform 0.3s ease;
 }
 
+
+.home_btn_logo_header img:before{
+background-color: rgba(180, 70, 0, 0.6);
+}
+
 .home_btn_logo_header:hover img {
-    transform: scale(1.05);
+    transform: translateY(-3px);
+
 }
 
 /* Button styles */
@@ -98,20 +97,16 @@ header {
 }
 
 .unified_header .header_btn section:hover {
-    background-color: rgba(255, 149, 0, 0.2);
+    background-color: rgba(180, 70, 0, 0.6);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 149, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(180, 70, 0, 0.5);
 }
 
-/* Account button special styling */
-.unified_header .account_btn section {
-    background-color: rgba(255, 149, 0, 0.15);
-}
 
 /* Active state for buttons */
 .unified_header .header_btn.active section {
-    background-color: rgba(255, 149, 0, 0.3);
-    box-shadow: 0 5px 15px rgba(255, 149, 0, 0.4);
+    background-color: rgba(180, 70, 0, 0.7);
+    box-shadow: 0 5px 15px rgba(180, 70, 0, 0.6);
 }
 
 /* Mobile menu toggle */
@@ -218,22 +213,22 @@ header {
 
 /* Wave color classes */
 .wave1_1, .wave1_2 {
-  fill: var(--wave-color-1);
+  fill: var(--header-color);
   opacity: 0.1;
 }
 
 .wave2_1, .wave2_2 {
-  fill: var(--wave-color-2);
+  fill: var(--header-color);
   opacity: 0.5;
 }
 
 .wave3_1, .wave3_2 {
-  fill: var(--wave-color-3);
+  fill: var(--header-color);
   opacity: 0.7;
 }
 
 .wave4_1, .wave4_2 {
-  fill: var(--wave-color-4);
+  fill: var(--header-color);
   opacity: 1;
 }
 
@@ -301,49 +296,3 @@ header {
     width: 5em;
   }
 }
-
-@media (max-width: 768px) {
-  .header_content {
-    height: auto;
-    min-height: 80px;
-  }
-  
-  .unified_header {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 10px 0;
-  }
-  
-  .nav_links {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    margin-top: 10px;
-  }
-  
-  .nav_links.open {
-    display: flex;
-  }
-  
-  .unified_header .header_btn {
-    width: 100%;
-  }
-  
-  .unified_header .header_btn section {
-    width: 100%;
-    text-align: center;
-    justify-content: flex-start;
-  }
-  
-  .menu_toggle {
-    display: block;
-  }
-  
-  .waves {
-    height: 60px;
-    min-height: 60px;
-  }
-}
-  
-  

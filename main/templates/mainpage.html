@@ -189,10 +189,410 @@
         </div>
     </main>
 
+    <!-- PRODUCT SHOWCASE -->
+    <section class="product-showcase">
+        <div class="container">
+            <h2 class="section-title">Популярные <span class="accent">читы</span></h2>
+            <p class="section-description">Ознакомьтесь с нашими лучшими продуктами, уже завоевавшими доверие тысяч игроков</p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-badge">Хит продаж</div>
+                    <img src="{{ url_for('static', filename='images/product-1.jpg') }}" alt="FPS Master" class="product-img">
+                    <div class="product-content">
+                        <h3>Ultimate CS2</h3>
+                        <div class="game-tag">CS2</div>
+                        <p>Полный премиум-набор с аимботом, ESP, радархаком и антиретрейсом. Визуальные настройки и обход Valve Anti-Cheat.</p>
+                        <div class="product-meta">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.8/5</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="old-price">15000₽</span>
+                                <span class="current-price">12999₽</span>
+                            </div>
+                        </div>
+                        <a href="/product/fps-master" class="product-button">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Популярный</div>
+                    <img src="{{ url_for('static', filename='images/product-2.jpg') }}" alt="Battle Assist" class="product-img">
+                    <div class="product-content">
+                        <h3>Rust Master</h3>
+                        <div class="game-tag">Rust</div>
+                        <p>Мощный чит для Rust с ESP игроков, ресурсов и животных, WallHack, No Recoil и функцией авто-фарма. Обход EAC.</p>
+                        <div class="product-meta">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.1/5</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="old-price">14500₽</span>
+                                <span class="current-price">13999₽</span>
+                            </div>
+                        </div>
+                        <a href="/product/battle-assist" class="product-button">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Новинка</div>
+                    <img src="{{ url_for('static', filename='images/product-3.jpg') }}" alt="WallVision Pro" class="product-img">
+                    <div class="product-content">
+                        <h3>WarSight</h3>
+                        <div class="game-tag">War Thunder</div>
+                        <p>Профессиональный чит для War Thunder с функциями усиленного прицеливания, маркировкой врагов через объекты и упреждением выстрелов.</p>
+                        <div class="product-meta">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0/5</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">14999₽</span>
+                            </div>
+                        </div>
+                        <a href="/product/wallvision-pro" class="product-button">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-grid" style="margin-top: 30px;">
+                <div class="product-card">
+                    <div class="product-badge">Бюджетно</div>
+                    <img src="{{ url_for('static', filename='images/product-4.jpg') }}" alt="CS2 WallHack" class="product-img">
+                    <div class="product-content">
+                        <h3>CS2 WallHack</h3>
+                        <div class="game-tag">CS2</div>
+                        <p>Базовый WallHack для CS2 с настройкой цветов и дистанции отображения. Только визуальные функции без аима.</p>
+                        <div class="product-meta">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.0/5</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">1499₽</span>
+                            </div>
+                        </div>
+                        <a href="/product/cs2-wallhack" class="product-button">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Бюджетно</div>
+                    <img src="{{ url_for('static', filename='images/product-5.jpg') }}" alt="Rust Resources ESP" class="product-img">
+                    <div class="product-content">
+                        <h3>Rust Resources ESP</h3>
+                        <div class="game-tag">Rust</div>
+                        <p>Поиск ресурсов и контейнеров в Rust. Показывает места ящиков с лутом, руду, растения и других важных объектов на карте.</p>
+                        <div class="product-meta">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                                <span>3.5/5</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">999₽</span>
+                            </div>
+                        </div>
+                        <a href="/product/rust-resources" class="product-button">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Бюджетно</div>
+                    <img src="{{ url_for('static', filename='images/product-6.jpg') }}" alt="WarThunder Aim Assist" class="product-img">
+                    <div class="product-content">
+                        <h3>WarThunder Aim Helper</h3>
+                        <div class="game-tag">War Thunder</div>
+                        <p>Помощник прицеливания для War Thunder. Расчет упреждения и автоматическая настройка дальномера для точных попаданий.</p>
+                        <div class="product-meta">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.0/5</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">1999₽</span>
+                            </div>
+                        </div>
+                        <a href="/product/warthunder-aim" class="product-button">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/catalog" class="view-all-button">Смотреть все продукты <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Что говорят наши <span class="accent">клиенты</span></h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Взял Ultimate CS2 после того как забанили на двух аккаунтах с другими читами. Играю уже 2.5 месяца, никаких проблем! Настроил яркие цвета моделей через ESP, теперь даже в дыму всё вижу. Аим тоже на высоте - регулировка по хитбоксам просто божественна. Из минусов только цена, но оно реально того стоит."</p>
+                        <div class="testimonial-author">
+                            <img src="{{ url_for('static', filename='images/avatar-1.jpg') }}" alt="Александр М.">
+                            <div>
+                                <h4>Александр М.</h4>
+                                <span>Клиент с 2022 года</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>"Сначала взял дешёвый ESP для ресурсов в Rust, чисто фармить по ночам - начал выносить столько лута, что через неделю апгрейднул до полной версии 😁 Ребятам с которыми играю в клане сказал что просто нашёл хорошую карту в интернете. Пока не спалился никому! Разрабы отзывчивые, когда последнее обновление сломало аим - починили за 6 часов!"</p>
+                        <div class="testimonial-author">
+                            <img src="{{ url_for('static', filename='images/avatar-2.jpg') }}" alt="Елена К.">
+                            <div>
+                                <h4>Денис К.</h4>
+                                <span>Клиент с 2023 года</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"После 3х лет мучений в War Thunder купил WarSight. Это просто небо и земля! Раньше попадал в башню танка с 3-4 попытки, теперь с первой в любые щели. Особенно порадовала функция, когда видно кто на тебя нацелился - даже когда противник за горой! ТТХ всех танков/самолётов как на ладони. Винрейт вырос с 49% до 73% за месяц, жалко, что друзьям не расскажешь откуда такой прогресс 😉"</p>
+                        <div class="testimonial-author">
+                            <img src="{{ url_for('static', filename='images/avatar-3.jpg') }}" alt="Максим Д.">
+                            <div>
+                                <h4>Максим Д.</h4>
+                                <span>Клиент с 2023 года</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="testimonial-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые <span class="accent">вопросы</span></h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Безопасны ли ваши читы?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, мы уделяем максимальное внимание безопасности наших продуктов. Все читы разрабатываются с использованием продвинутых методов обхода анти-чит систем. Наша команда постоянно мониторит обновления игр и оперативно адаптирует продукты под новые версии защиты.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Как происходит процесс покупки и активации?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>После оплаты вы получаете доступ к личному кабинету, где можно скачать лоадер и активировать продукт с помощью ключа. Подробная инструкция приходит на указанную при регистрации почту. При возникновении вопросов наша служба поддержки всегда готова помочь.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Как часто выходят обновления?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Обновления выходят сразу после значимых патчей в игре, обычно в течение 24-48 часов. Для критических обновлений срок может составлять всего несколько часов. Уведомления об обновлениях приходят в личный кабинет и на почту.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Можно ли настроить чит под себя?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, все наши продукты имеют гибкие настройки под различные стили игры. Вы можете настроить практически любой параметр, включая визуальные элементы, параметры аимбота, триггерботы и многое другое. В личном кабинете доступны видеоинструкции по настройке.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Что делать, если чит перестал работать?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>В случае любых проблем обратитесь в нашу техподдержку через личный кабинет или по электронной почте. Наши специалисты работают 24/7 и обычно отвечают в течение 1-2 часов. Если проблема связана с обновлением игры, мы бесплатно предоставляем актуальную версию.</p>
+                    </div>
+                </div>
+            </div>
+            <a href="/faq" class="view-all-button">Все вопросы и ответы <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Готовы поднять свой уровень игры?</h2>
+                <p>Присоединяйтесь к тысячам игроков, которые уже выбрали продукты Lefaton Cheats</p>
+                <div class="cta-buttons">
+                    <a href="/catalog" class="cta-button primary">Выбрать продукт</a>
+                    <a href="/register" class="cta-button secondary">Создать аккаунт</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-waves">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 1440 100" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="footer-wave-path" d="M0,40 C180,20 360,80 720,40 C1080,0 1260,60 1440,40 L1440,100 L0,100 Z" />
+                </defs>
+                <g class="parallax">
+                    <use class="wave1_1" xlink:href="#footer-wave-path" x="0" y="0"/>
+                    <use class="wave1_2" xlink:href="#footer-wave-path" x="1440" y="0"/>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Lefaton Logo" class="footer-logo">
+                    <p>Ведущий поставщик высококачественных игровых решений с 2020 года. Мы помогаем игрокам раскрыть их потенциал.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Продукты</h3>
+                    <ul>
+                        <li><a href="/catalog/fps">FPS игры</a></li>
+                        <li><a href="/catalog/mmorpg">MMORPG</a></li>
+                        <li><a href="/catalog/battle-royale">Battle Royale</a></li>
+                        <li><a href="/catalog/new">Новинки</a></li>
+                        <li><a href="/catalog/sale">Скидки</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Поддержка</h3>
+                    <ul>
+                        <li><a href="/support">Техподдержка</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/guides">Руководства</a></li>
+                        <li><a href="/updates">Обновления</a></li>
+                        <li><a href="/terms">Условия использования</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Аккаунт</h3>
+                    <ul>
+                        <li><a href="/login">Вход</a></li>
+                        <li><a href="/register">Регистрация</a></li>
+                        <li><a href="/account">Личный кабинет</a></li>
+                        <li><a href="/account/purchases">История покупок</a></li>
+                        <li><a href="/account/settings">Настройки</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Связаться с нами</h3>
+                    <p><i class="fas fa-envelope"></i> support@lefatoncheats.com</p>
+                    <p><i class="fab fa-telegram"></i> @lefaton_support</p>
+                    <p><i class="fab fa-discord"></i> Lefaton Community</p>
+                    <div class="payment-methods">
+                        <h4>Принимаем к оплате:</h4>
+                        <div class="payment-icons">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-ethereum"></i>
+                            <i class="fab fa-bitcoin"></i>
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lefaton Cheats. Все права защищены.</p>
+                <div class="footer-bottom-links">
+                    <a href="/privacy">Политика конфиденциальности</a>
+                    <a href="/terms">Условия использования</a>
+                    <a href="/refund">Политика возврата</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Particles.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <!--<script src="{{ url_for('static', filename='js/settings.js') }}"></script>--> 
     <script src="{{ url_for('static', filename='js/background.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
@@ -246,6 +646,80 @@
                     });
                 });
             }
+            
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Testimonial slider functionality
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.testimonial-prev');
+            const nextBtn = document.querySelector('.testimonial-next');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                // Hide all slides
+                testimonialSlides.forEach(slide => {
+                    slide.style.display = 'none';
+                    slide.classList.remove('active');
+                });
+                
+                // Deactivate all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show current slide and activate current dot
+                testimonialSlides[index].style.display = 'block';
+                testimonialSlides[index].classList.add('active');
+                dots[index].classList.add('active');
+            }
+            
+            // Initialize slider
+            showSlide(currentSlide);
+            
+            // Event listeners for controls
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + testimonialSlides.length) % testimonialSlides.length;
+                    showSlide(currentSlide);
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % testimonialSlides.length;
+                    showSlide(currentSlide);
+                });
+            }
+            
+            // Dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+            
+            // Auto rotate slides every 5 seconds
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % testimonialSlides.length;
+                showSlide(currentSlide);
+            }, 5000);
         });
     </script>
 </body>

@@ -2,13 +2,13 @@
 
 :root {
     /* Base Colors */
-    --header-color: #7c5cff;
+    --header-color: #ff9500;
     --background-color: #000000;
-    --accent-color: #7c5cff;
+    --accent-color: #ff9500;
     --text-color: #ffffff;
     
     /* Color variants */
-    --accent-hover: #9b82ff;
+    --accent-hover: #ffaa33;
     --text-secondary: rgba(255, 255, 255, 0.7);
     --card-bg: rgba(18, 18, 18, 0.8);
     --card-border: rgba(255, 255, 255, 0.05);
@@ -32,7 +32,7 @@
     --wave-color-4: rgba(255, 149, 0, 1);
     
     /* Convert RGB values for JS calculations */
-    --accent-color-rgb: 124, 92, 255;
+    --accent-color-rgb: 255, 149, 0;
 }
 
 /* Theme variations */
@@ -94,7 +94,7 @@ input, select, textarea, button, .color-picker, .toggle,
 }
 
 [data-accent-color="#8e44ad"] {
-    --accent-color-rgb: 142, 68, 173;
+    --accent-color-rgb: 255, 149, 0;
 }
 
 [data-accent-color="#cd412b"] {

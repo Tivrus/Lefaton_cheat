@@ -111,11 +111,6 @@ function applyCustomThemeColors(theme) {
                 document.documentElement.style.setProperty('--gradient-primary', 
                     `linear-gradient(135deg, ${settings.headerColor}, ${lighterColor})`);
                 
-                // Update wave colors with transparency
-                document.documentElement.style.setProperty('--wave-color-1', hexToRgba(settings.headerColor, 0.7));
-                document.documentElement.style.setProperty('--wave-color-2', hexToRgba(settings.headerColor, 0.5));
-                document.documentElement.style.setProperty('--wave-color-3', hexToRgba(settings.headerColor, 0.3));
-                document.documentElement.style.setProperty('--wave-color-4', settings.headerColor);
                 
                 // Update glow color
                 document.documentElement.style.setProperty('--glow-color', hexToRgba(settings.headerColor, 0.3));
